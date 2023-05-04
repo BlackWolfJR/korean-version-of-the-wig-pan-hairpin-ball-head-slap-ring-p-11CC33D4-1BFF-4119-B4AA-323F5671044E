@@ -2,15 +2,21 @@
 <html>
 <head>
     <title>CheaproSell, Buy cheap and easy!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
+        .checked {
+            color: orange;
+        }
         body {
-            height:400vh;
+            height:300vh;
             margin: 0px;
             padding: 0px;
-            background-color: aliceblue;
+            background-color: rgb(255, 255, 255);
         }
         #c1{
-            background-color: gray;
+            display: flex;
+            background-image: linear-gradient(90deg,rgb(1,0,26) 40%, white);
+            box-shadow: 0px 1px 4px black;
             border-radius: 0 0 3px 3px;
             width:100%;
             height: 93px;
@@ -20,65 +26,62 @@
         #logo{
     
             margin:3px 12px;
-            position:fixed;
         }
         #Products{
 
-            background-color: gray;
+
             font-family:Bold;
             font-size: 21px;
-            color:aliceblue;
+            color:white;
             border:0px;
             padding:5px;
-            margin:24px 110px;
-            position:fixed;
+            margin:24px 15px;
+            height:25px;
             border-radius: 8px;
             text-shadow: 0 0 5px black;
             transition:0.4s;
         }
         #Products:hover{
 
-            background-color: aliceblue;
+            background-color: white;
             color:black;
             text-shadow: 0 0 5px black;
         }
         #ContactUs{
 
-            background-color: gray;
             font-family:Bold;
             font-size: 21px;
-            color:aliceblue;
+            color:white;
             border:0px;
             padding:5px;
-            margin:24px 330px;
-            position:fixed;
+            margin:24px 15px;
+            height:25px;
             border-radius: 8px;
             text-shadow: 0 0 5px black;
             transition:0.4s;
         }
         #ContactUs:hover{
 
-            background-color: aliceblue;
+            background-color: white;
             color:black;
             text-shadow: 0 0 5px black;
         } 
         #AboutUs{
 
-            background-color: gray;
             font-family:Bold;
             font-size: 21px;
-            color:aliceblue;
+            color:white;
             border:0px;
             padding:5px;
-            margin:24px 220px;
-            position:fixed;
+            margin:24px 15px;
+            height:25px;
             border-radius: 8px;
             text-shadow: 0 0 5px black;
             transition:0.4s;
         }
         #AboutUs:hover{
 
-            background-color: aliceblue;
+            background-color: white;
             color:black;
             text-shadow: 0 0 5px black;
         }
@@ -86,110 +89,381 @@
             font-family:Bold;
             font-size: 21px;
             color:black;
-            background-color: aliceblue;
+            background-color: white;
             border:0px;
             padding:5px;
-            margin:24px 480px;
-            position:fixed;
+            height:22px;
+            margin:24px 30px;
             transition:0.4s;
             border-radius: 8px;
-        } 
-        #MostPopularProducts{
+        }
+        #SignIn{
 
-            background-color: gray;
-            border: 5px solid gray;
-            border-radius: 10px;
-            width: 95.3%;
-            position:absolute;
-            margin:125px 20px;
             font-family:Bold;
             font-size: 21px;
-            color:aliceblue;
-            text-shadow: 0 0 10px black;
-        } 
+            color:white;
+            border:0px;
+            padding:5px;
+            height:25px;
+            margin: 24px 25px;
+            border-radius: 8px;
+            text-shadow: 0 0 5px black;
+            transition:0.4s;
+        }
+        #SignIn:hover{
+
+            background-color: white;
+            color:black;
+            text-shadow: 0 0 5px black;
+        }
         #Cart{
 
+            display: inline;
+            background-color: white;
             border:none;
-            border-radius: 10px;
-            background-color: gray;
-            margin:10px 93%;
+            border-radius: 1000px;
+            border: 9px solid white;
+            margin:3px 0;
+            right:5px;
             position:fixed;
-            transition: 1s background-color;
+            transition: 1s box-shadow
         }
         #Cart:hover{
 
-            background-color: aliceblue;
-            border: solid aliceblue 2px;
+            box-shadow: 0 0 50px black;
+            border: 20px solid white;
         }
-        #AMostPopularProducts{
+        #Cart:hover #NumberOfProductsInCart{
+
+            margin:18px 10px;
+        }
+        #NumberOfProductsInCart{
+
+            display: inline;
+            background-color: white;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 18px;
+            border-radius: 15px;
+            margin-top: 18px;
+            right:38px;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            position:fixed;
+        }
+        #u1{
+
+            margin:137px 100px;
+            width: 80%;
+            position: absolute;
+        }
+        #product{
+
+            box-shadow:0 0 2px black;
+        }
+        #productinfo{
 
             position: absolute;
-            margin:170px 20px;
-            width: 96%;
-            height:320px;
-            border:1px solid black;
-            border-radius: 10px;
+            display: inline;
+            margin: 0 10px;
+            top:0px;
         }
-        .p1{
-
-            height:275px;
-            margin:10px 10px;
-            display:inline-block;
+        #productname{
+            
+            display: block;
+            line-height: 1.875rem;
+            font-size: 22px;
+            color:rgb(1,0,26);
+            letter-spacing: 0.2px;
+            font-weight: 550;
+            font-family: sans-serif;
         }
-        .p1-{
+        #price{
 
-            font-family:Bold;
-            font-size: 17px;
-            color: black;
-            text-align: center;
-            margin:-4px 0px;
-            letter-spacing:1px;
+            display:block;
+            color:rgb(255, 0, 0);
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 30px;
         }
-        .p1--{
+        #AddToCart{
 
+
+            margin-top: 5px;
+            color: rgb(1,0,26);
+            padding:2px 0;
+            font-size: 15px;
             width:100%;
             font-family:Bold;
             font-size: 21px;
             background-color: rgb(1, 0, 26);
-            color: aliceblue;
-            border:1px solid black;
-            text-align: center;
-            margin:10px 0px;
-            border-radius: 8px;
-            transition:0.4s text-shadow, 0.6s background-color;
-        }
-        .p1--:hover{
-
-            background-color:rgb(95, 95, 95);
             color: white;
-            text-shadow: 0 0 10px black;
+            border:1px solid black;
+            box-shadow: 0px 1px 2px black;
+            text-align: center;
+            border-radius: 8px;
+            transition:0.4s text-shadow, 0.6s box-shadow;
+        }
+        #AddToCart:hover{
+
+            color: white;
+            text-shadow: 0 0 10px white;
+            box-shadow: 0 0 15px rgb(1, 0, 26);
+        }
+        #Buy{
+
+            margin-top:5px;
+            color: rgb(1,0,26);
+            padding:2px 0;
+            font-size: 15px;
+            width:100%;
+            font-family:Bold;
+            font-size: 21px;
+            background-color: rgb(1, 0, 26);
+            color: white;
+            border:1px solid black;
+            box-shadow: 0px 1px 2px black;
+            text-align: center;
+            border-radius: 8px;
+            transition:0.4s text-shadow, 0.6s box-shadow;
+        }
+        #Buy:hover{
+
+            color: white;
+            text-shadow: 0 0 10px white;
+            box-shadow: 0 0 15px rgb(1, 0, 26);
+        }
+        #container{
+
+            position: absolute;
+            width:65px;
+            margin:137px 17px;
+            box-shadow:0 0 5px black;
+            transition: 0.5s;
+        }
+        #container:hover{
+
+            box-shadow:0 0 10px black;
+        }
+        #img1:hover{
+
+            border:1px solid rgb(1,0,26);
+        }
+        #img2:hover{
+
+            border:1px solid rgb(1,0,26);
+        }
+        #img3:hover{
+
+            border:1px solid rgb(1,0,26);
+        }  
+        #img4:hover{
+
+            border:1px solid rgb(1,0,26);
+        }  
+        #img5:hover{
+
+            border:1px solid rgb(1,0,26);
+        }  
+        #img6:hover{
+
+            border:1px solid rgb(1,0,26);
+        }  
+        #img7:hover{
+
+            border:1px solid rgb(1,0,26);
+        }  
+        #img8:hover{
+
+            border:1px solid rgb(1,0,26);
+        }
+        #u2{
+
+            width: 80%;
+            position: absolute;
+            margin: 590px 100px;
         }
     </style>
+    <script>
+        function changeimage1(){
+
+            var imageproduct = document.getElementById("product");
+            imageproduct.style="width:452px;height:435px;";
+            imageproduct.src = "big.png";
+        }
+        function changeimage2(){
+
+            var imageproduct = document.getElementById("product");
+            imageproduct.style="width:452px;height:435px;";
+            imageproduct.src = "2.jpg";
+        }
+        function changeimage3(){
+
+            var imageproduct = document.getElementById("product");
+            imageproduct.style="width:452px;height:435px;";
+            imageproduct.src = "3.jpg";
+        }
+        function changeimage4(){
+
+            var imageproduct = document.getElementById("product");
+            imageproduct.style="width:452px;height:435px;";
+            imageproduct.src = "4.jpg";
+        }
+        function changeimage5(){
+
+            var imageproduct = document.getElementById("product");
+            imageproduct.style="width:452px;height:435px;";
+            imageproduct.src = "5.jpg";
+        }
+        function changeimage6(){
+
+            var imageproduct = document.getElementById("product");
+            imageproduct.style="width:452px;height:435px;";
+            imageproduct.src = "6.jpg";
+        }
+        function changeimage7(){
+
+            var imageproduct = document.getElementById("product");
+            imageproduct.style="width:452px;height:435px;";
+            imageproduct.src = "7.jpg";
+        }
+        function changeimage8(){
+
+            var imageproduct = document.getElementById("product");
+            imageproduct.style="width:452px;height:435px;";
+            imageproduct.src = "8.jpg";
+        }
+        function AddToCart(){
+
+            var NumberOfProductsInCart = document.getElementById("NumberOfProductsInCart");
+            document.cookie = "cookieName=value; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+            var split1 = document.cookie.split("=");
+            console.log(document.cookie);
+            if (Number(NumberOfProductsInCart.innerHTML)>=9){
+
+                NumberOfProductsInCart.style="width: 21px;height: 21px;margin-top: 18px;right:37px;"
+            }
+            if (Number(NumberOfProductsInCart.innerHTML)>=50){
+
+                alert("No more than 50 products!")
+                return;
+            } 
+            NumberOfProductsInCart.innerHTML = Number(NumberOfProductsInCart.innerHTML) + 1;
+        }
+    </script>
 </head>
 <body>
+    <div style="position: absolute;bottom: 0px;margin:-300vh 0;width: 100%;height: 600px; background-color: rgb(1,0,26);"></div>
     <div id="c1">
         <img id="logo" src="https://raw.githubusercontent.com/BlackWolfJR/CheaproSell/main/bolas123.png" alt="Failed to Display Logo"></img>
         <a id="Products" href="https://blackwolfjr.github.io/home/">Products</a>
         <a id="AboutUs" href="https://blackwolfjr.github.io/AboutUs/">About Us</a>
         <a id="ContactUs" href="https://blackwolfjr.github.io/ContactUs/">Contact Us</a>
         <input id="SearchBar" type="text" placeholder="Search for product..">
-        <button id="Cart"><img src="https://raw.githubusercontent.com/BlackWolfJR/CheaproSell/main/1111.png"></img></button>
+        <a id="SignIn" href="https://blackwolfjr.github.io/SignIn/">Sign In</a>
+        <button id="Cart"><img src="cart.png" style="width: 64px;height: 64px;"></img><div id="NumberOfProductsInCart">1</div></button>
     </div>
-    <div>
-        <h1 id="MostPopularProducts">Most Popular Products</h1>
-        <div id="AMostPopularProducts">
-            <div class="p1"><img src="https://raw.githubusercontent.com/BlackWolfJR/CheaproSell/main/1.png"></img>
-                <hr style="border: 1px solid rgba(0, 0, 0, 0.800);"><p class="p1-">Electric Nail Clipper</p></hr>
-                <button class="p1--">View</button>
+    <hr style="box-shadow:0 0 1px black;border:1px solid rgb(1,0,26);margin:115px 20px;height: 0;width: 97%;position: absolute;">
+    <div id="container">
+        <img onmouseover="changeimage1()" id="img1" src="big.png" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img>
+        <img onmouseover="changeimage2()" id="img2" src="2.jpg" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img>
+        <img onmouseover="changeimage3()" id="img3" src="3.jpg" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img>
+        <img onmouseover="changeimage4()" id="img4" src="4.jpg" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img>
+        <img onmouseover="changeimage5()" id="img5" src="5.jpg" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img>
+        <img onmouseover="changeimage6()" id="img5" src="6.jpg" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img>
+        <img onmouseover="changeimage7()" id="img5" src="7.jpg" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img>
+        <img onmouseover="changeimage8()" id="img5" src="8.jpg" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img>
+    </div>
+    <div id="u1">
+        <img id="product" src="big.png"></img>
+        <div id="productinfo">
+            <span id="productname">Electric Automatic Nail Clipper with Light & 2 Speeds,Fingernail Cutter and File 2 in 1 Design, Nail Scraps Storage,USB Rechargeable Safety Fingernail Trimmer for Baby, Kids, Seniors and Adult</span>
+            <hr><span id="InStock" style="color:green;font-size: 26px;">In Stock</span></hr>
+            <span style="margin-left: 20px" class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            <p style="display: inline;margin-left: 5px;font-size: 20px;color:rgb(1,0,26)">3.1</p>
+            <p style="display: inline;margin-left: 30px;font-size: 20px;color:rgb(1,0,26)">124 Ratings</p>
+            <span id="price">$39.99</span>
+            <img src="paypalimage.png">
+            <button onclick="AddToCart()" id="AddToCart">Add To Cart</button>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="T5X7V358F7CEL">
+                <button id="Buy">Buy Now</button>
+            </form>    
+        </div>
+    </div>
+    <div id="u2">
+        <h1 style="text-align:center;font-size: 22px;color:rgb(1,0,26);font-size: 22px;color:rgb(1,0,26);font-family: sans-serif;">About this Product</h1>
+        <hr style="margin:-10px 0;"></hr>
+        <ul>
+            <li style="font-size: 18px;">[High Safety and Ergonomic Design] the blade is hidden behind a curved groove and the recessed cutter allows for perfect nail separation while ensuring safety , especially for babies and people with eye problems.[High Safety and Ergonomic Design] the blade is hidden behind a curved groove and the recessed cutter allows for perfect nail separation while ensuring safety , especially for babies and people with eye problems.</li>
+            <li style="margin-top:8px;font-size: 18px;">[LED auxiliary Lighting and Quiet Working] nail cutter design adds auxiliary lighting, high speed and silent motor designed specifically for nighttime nail cutting. This nail clipper is certainly an ideal gift for the elderly, children and many people with poor eyesight.</li>
+            <li style="margin-top:8px;font-size: 18px;">[2-Speed Models and Rechargeable Portable Design] Just one button, short press to switch the speed. High and low dual speed design is suitable for the elderly and children.with 600mAH high capacity battery, using Type-C cable (included in the package) only takes 2~3 hours to fill. It is convenient to take it on a trip or business trip.</li>
+            <li style="margin-top:8px;font-size: 18px;">[Nail Debris Storage and Easy Cleaning]Nail clippings from nail clipping are collected in the product's storage box. By pressing the upper part of the window, you can easily open and dump the nail clippings for quick and easy cleaning.</li>
+            <li style="margin-top:8px;font-size: 18px;">[What You Get] Package includes 1 x electric nail clipper, 1 x cleaning brush, 1 x C-type charging cable, 1 x instruction manual. Please feel free to contact us if you have any problems about the product.</li>
+        </ul>
+        <h1 style="text-align:center;font-size: 22px;color:rgb(1,0,26);font-size: 22px;color:rgb(1,0,26);font-family: sans-serif;">Specifications</h1>
+        <hr style="margin:-10px 0;"></hr>
+        <div style="background-color: azure;position: absolute;width:50%;margin-top:20px;box-shadow: 0px 0 2px black;">
+            <div style="display:flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
+                <p style="font-size: 19px;">Brand</p>
             </div>
-            <div class="p1"><img src="https://raw.githubusercontent.com/BlackWolfJR/CheaproSell/main/51rl6KyZuWL._AC_SX569_.jpg"></img>
-                <hr style="border: 1px solid rgba(0, 0, 0, 0.800);"><p class="p1-">Hair Clipper</p></hr>
-                <button class="p1--">View</button>
+            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
+                <p style="font-size: 19px;">Model</p>
             </div>
-            <div class="p1"><img src="https://raw.githubusercontent.com/BlackWolfJR/CheaproSell/main/pendrive.jpg"></img>
-                <hr style="border: 1px solid rgba(0, 0, 0, 0.800);"><p class="p1-">Exclusive FS Scripts</p></hr>
-                <button class="p1--">View</button>
-            </div> 
+            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
+                <p style="font-size: 19px;">Magnetic cover</p>
+            </div>
+            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
+                <p style="font-size: 19px;">Light sensor</p>
+            </div>
+            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
+                <p style="font-size: 19px;">Fingerprint</p>
+            </div>
+            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
+                <p style="font-size: 19px;">LED soft light</p>
+            </div>
+            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
+                <p style="font-size: 19px;">Hanging hole</p>
+            </div>
+            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
+                <p style="font-size: 19px;">Size</p>
+            </div>
+            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
+                <p style="font-size: 19px;">Weight</p>
+            </div>
+        </div>
+        <div style="background-color: wheat;position: absolute;width:50%;margin-top:20px;box-shadow: 0px 1px 2px black;margin-left:50%">
+            <div style="display:flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
+                <p style="font-size: 19px;">Vanyuei</p>
+            </div>
+            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
+                <p style="font-size: 19px;">SMPH-ZJDO3S</p>
+            </div>
+            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
+                <p style="font-size: 19px;">Yes</p>
+            </div>
+            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
+                <p style="font-size: 19px;">Yes</p>
+            </div>
+            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
+                <p style="font-size: 19px;">No</p>
+            </div>
+            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
+                <p style="font-size: 19px;">Yes</p>
+            </div>
+            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
+                <p style="font-size: 19px;">Yes</p>
+            </div>
+            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
+                <p style="font-size: 19px;">2.08*1.67*0.8 Inch</p>
+            </div>
+            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
+                <p style="font-size: 19px;">0.11 lb</p>
+            </div>
         </div>
     </div>
 </body>
