@@ -335,7 +335,7 @@
         }
         function AddToCart(){
 
-            var NumberOfProductsInCart = document.cookie.split(";")[0].search(/\d/);
+            const NumberOfProductsInCart = document.cookie.match(/^NumberOfProducts=\d+$/);
             var NumberOfProductsInCart1 = document.getElementById("NumberOfProductsInCart");
             if (Number(NumberOfProductsInCart1.innerHTML)>=9){
 
