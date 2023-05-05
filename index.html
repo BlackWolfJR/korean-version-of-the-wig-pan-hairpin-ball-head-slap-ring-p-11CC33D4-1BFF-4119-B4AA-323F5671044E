@@ -340,7 +340,7 @@
                 document.cookie = "NumberOfProducts=1;expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/";
                 return;
             }
-            const NumberOfProductsInCart = (((document.cookie.match(/^NumberOfProducts=\d+/)).toString()).split("=")[1]);
+            var NumberOfProductsInCart = (((document.cookie.match(/^NumberOfProducts=\d+/)).toString()).split("=")[1]);
             var NumberOfProductsInCart1 = document.getElementById("NumberOfProductsInCart");
             if (Number(((document.cookie.match(/^NumberOfProducts=\d+/)).toString()).split("=")[1])>=9){
 
