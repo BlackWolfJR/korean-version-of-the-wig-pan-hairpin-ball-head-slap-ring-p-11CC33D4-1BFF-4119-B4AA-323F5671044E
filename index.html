@@ -286,9 +286,7 @@
     </style>
     <script>
         window.addEventListener("load", function(){
-            if (document.cookie.search("NumberOfProductsInCart=")==0){
-                document.getElementById("NumberOfProductsInCart").innerHTML = Number((((document.cookie.match(/NumberOfProducts=\d+/)).toString()).split("=")[1]));
-            }
+            document.getElementById("NumberOfProductsInCart").innerHTML = Number((((document.cookie.match(/NumberOfProducts=\d+/)).toString()).split("=")[1]));
         })
         function changeimage1(){
 
