@@ -335,21 +335,20 @@
         }
         function AddToCart(){
 
-            const NumberOfProductsInCart = document.cookie.match(/^NumberOfProducts=\d+$/);
+            const NumberOfProductsInCart = ((document.cookie.match(/^NumberOfProducts=\d+/))).toString().split("=")[1];
             var NumberOfProductsInCart1 = document.getElementById("NumberOfProductsInCart");
-            if (Number(NumberOfProductsInCart1.innerHTML)>=9){
+            if (Number((document.cookie.match(/^NumberOfProducts=\d+/))).toString().split("=")[1]>=9){
 
                 NumberOfProductsInCart1.style="width: 21px;height: 21px;margin-top: 18px;right:37px;"
             }
-            if (Number(NumberOfProductsInCart1.innerHTML)>=50){
+            if (Number((document.cookie.match(/^NumberOfProducts=\d+/))).toString().split("=")[1]>=50){
 
                 alert("No more than 50 products!")
                 return;
             } 
             document.cookie = "NumberOfProducts=" + (NumberOfProductsInCart+1) + ";expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/";
             alert(document.cookie);
-            console.log(NumberOfProductsInCart + "kk");
-            NumberOfProductsInCart1.innerHTML = Number(NumberOfProductsInCart1.innerHTML) + 1;
+            console.log(NumberOfProductsInCart);
         }
     </script>
 </head>
