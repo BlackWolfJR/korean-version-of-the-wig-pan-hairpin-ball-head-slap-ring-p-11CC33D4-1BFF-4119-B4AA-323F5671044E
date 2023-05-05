@@ -343,13 +343,13 @@
                 document.cookie = "NumberOfProducts=1;expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/";
                 return;
             }
-            var NumberOfProductsInCart = (((document.cookie.match(/^NumberOfProducts=\d+/)).toString()).split("=")[1]);
+            const NumberOfProductsInCart = (((document.cookie.match(/^NumberOfProducts=\d+/)).toString()).split("=")[1]);
             var NumberOfProductsInCart1 = document.getElementById("NumberOfProductsInCart");
-            if (Number(((document.cookie.match(/^NumberOfProducts=\d+/)).toString()).split("=")[1])>=9){
+            if (Number(NumberOfProductsInCart)>=9){
 
                 NumberOfProductsInCart1.style="width: 21px;height: 21px;margin-top: 18px;right:37px;"
             }
-            if (Number(((document.cookie.match(/^NumberOfProducts=\d+/)).toString()).split("=")[1])>=25){
+            if (Number(NumberOfProductsInCart)>=25){
 
                 alert("No more than 25 products!")
                 return;
