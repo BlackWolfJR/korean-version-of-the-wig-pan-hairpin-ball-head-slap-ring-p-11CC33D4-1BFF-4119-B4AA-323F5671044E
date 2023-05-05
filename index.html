@@ -345,8 +345,8 @@
                 alert("No more than 50 products!")
                 return;
             } 
-            document.cookie = "test=1; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
-            var split1 = document.cookie.split("=");
+            document.cookie = "username=John Smith; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
+            alert(document.cookie);
             NumberOfProductsInCart.innerHTML = Number(NumberOfProductsInCart.innerHTML) + 1;
         }
     </script>
