@@ -335,19 +335,20 @@
         }
         function AddToCart(){
 
-            var NumberOfProductsInCart = document.getElementById("NumberOfProductsInCart");
-            if (Number(NumberOfProductsInCart.innerHTML)>=9){
+            var NumberOfProductsInCart = document.cookie.split(";")[0].search(/\d/);
+            var NumberOfProductsInCart1 = document.getElementById("NumberOfProductsInCart");
+            if (Number(NumberOfProductsInCart1.innerHTML)>=9){
 
-                NumberOfProductsInCart.style="width: 21px;height: 21px;margin-top: 18px;right:37px;"
+                NumberOfProductsInCart1.style="width: 21px;height: 21px;margin-top: 18px;right:37px;"
             }
-            if (Number(NumberOfProductsInCart.innerHTML)>=50){
+            if (Number(NumberOfProductsInCart1.innerHTML)>=50){
 
                 alert("No more than 50 products!")
                 return;
             } 
-            document.cookie = "username=John Smith; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
+            document.cookie = "NumberOfProducts=" + (NumberOfProductsInCart+1) + ";expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/";
             alert(document.cookie);
-            NumberOfProductsInCart.innerHTML = Number(NumberOfProductsInCart.innerHTML) + 1;
+            NumberOfProductsInCart1.innerHTML = Number(NumberOfProductsInCart1.innerHTML) + 1;
         }
     </script>
 </head>
