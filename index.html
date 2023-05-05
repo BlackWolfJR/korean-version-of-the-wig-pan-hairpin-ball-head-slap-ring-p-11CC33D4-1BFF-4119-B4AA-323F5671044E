@@ -351,7 +351,7 @@
                 alert("No more than 25 products!")
                 return;
             } 
-            document.cookie = "NumberOfProducts=" + (NumberOfProductsInCart+1) + ";expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/";
+            document.cookie = "NumberOfProducts=" + (Number(NumberOfProductsInCart)+1) + ";expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/";
             alert(document.cookie);
             console.log(NumberOfProductsInCart);
         }
