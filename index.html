@@ -352,8 +352,7 @@
                 return;
             } 
             document.cookie = "NumberOfProducts=" + (Number(NumberOfProductsInCart)+1) + ";expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/";
-            alert(document.cookie);
-            console.log(NumberOfProductsInCart);
+            NumberOfProductsInCart1.innerHTML = Number(NumberOfProductsInCart)+1;
         }
     </script>
 </head>
