@@ -287,7 +287,21 @@
     </style>
     <script>
         window.addEventListener("load", function(){
-            document.getElementById("NumberOfProductsInCart").innerHTML = Number((((document.cookie.match(/NumberOfProducts=\d+/)).toString()).split("=")[1]));
+            if (document.cookie.search("NumberOfProducts=")==-1){
+                return;
+            }
+            const NumberOfProductsInCart = (((document.cookie.match(/NumberOfProducts=\s+/)).toString()).split("=")[1]);
+            for (let i = 0; i < 10; i++) {
+                sha256("numofproductsis" + i).then(hash => {
+                    if (hash.toString()==NumberOfProductsInCart) {
+                        let found = true;
+                        let num = i;
+                    }
+                })
+            }
+            if (found==true){
+                document.getElementById("NumberOfProductsInCart").innerHTML = i;
+            }
         })
         function changeimage1(){
 
