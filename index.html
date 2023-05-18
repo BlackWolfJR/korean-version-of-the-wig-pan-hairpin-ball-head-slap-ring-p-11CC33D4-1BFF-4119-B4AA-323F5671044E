@@ -360,10 +360,12 @@
             const NumberOfProductsInCart = (((document.cookie.match(/NumberOfProducts=\s+/)).toString()).split("=")[1]);
             var NumberOfProductsInCart1 = document.getElementById("NumberOfProductsInCart");
             for (let i = 0; i < 10; i++) {
-                if (sha256("numofproductsis"+i).toString()==NumberOfProductsInCart) {
-                    let found = true;
-                    let num = i;
-                }
+                sha256("numofproductsis" + i).then(hash => {
+                    if (hash.toString()==NumberOfProductsInCart) {
+                        let found = true;
+                        let num = i;
+                    }
+                })
             }
             if (found!=true){
                 return;
@@ -378,7 +380,9 @@
                 return;
             }   
             document.getElementById("productincart").style.display = "inline-block";
-            document.cookie = `NumberOfProducts=${sha256('numofproductsis' + i)};expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
+            sha256("numofproductsis" + i).then(hash => {
+                document.cookie = `NumberOfProducts=${hash};expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
+            });
             NumberOfProductsInCart1.innerHTML = i+1;
         }
         var cartOpen = false;
