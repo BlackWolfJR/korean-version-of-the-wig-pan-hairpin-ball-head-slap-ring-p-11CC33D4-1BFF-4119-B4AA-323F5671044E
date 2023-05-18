@@ -290,7 +290,7 @@
             if (document.cookie.search("NumberOfProducts=")==-1){
                 return;
             }
-            const NumberOfProductsInCart = (((document.cookie.match(/NumberOfProducts=\s+/)).toString()).split("=")[1]);
+            const NumberOfProductsInCart = (document.cookie.match(/NumberOfProducts=([0-9a-fA-F]+)/).toString().split("=")[1]);
             for (let i = 0; i < 10; i++) {
                 sha256("numofproductsis" + i).then(hash => {
                     if (hash.toString()==NumberOfProductsInCart) {
