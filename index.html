@@ -21,7 +21,7 @@
             width:100%;
             height: 93px;
             position:fixed;
-            z-index: 1;
+            z-index: 2;
         }
         #logo{
     
@@ -339,12 +339,22 @@
         }
         function AddToCart(){
 
+            function sha256(input) { //// hash func
+                const encoder = new TextEncoder();
+                const data = encoder.encode(input);
+                return crypto.subtle.digest('SHA-256', data).then(buffer => {
+                    const hashArray = Array.from(new Uint8Array(buffer));
+                    const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+                    return hashHex;
+                });
+            } ////
             if (document.cookie.search("NumberOfProducts=")==-1){
 
-                document.cookie = "NumberOfProducts=1;expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/";
+                document.cookie = "NumberOfProducts=${sha256('numofproductsis1')};expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/";
+                document.getElementById("productincart").style.display = "inline-block";
                 return;
             }
-            const NumberOfProductsInCart = (((document.cookie.match(/NumberOfProducts=\d+/)).toString()).split("=")[1]);
+            const NumberOfProductsInCart = (((document.cookie.match(/NumberOfProducts=\s+\d+/)).toString()).split("=")[1].toString().match(/\d+/).toString());
             var NumberOfProductsInCart1 = document.getElementById("NumberOfProductsInCart");
             if (Number(NumberOfProductsInCart)>=9){
 
@@ -354,9 +364,20 @@
 
                 alert("No more than 25 products!")
                 return;
-            } 
-            document.cookie = "NumberOfProducts=" + (Number(NumberOfProductsInCart)+1) + ";expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/";
+            }
+            document.getElementById("productincart").style.display = "inline-block";
+            document.cookie = "NumberOfProducts=" + sha256('numofproductsis' + NumberOfProductsInCart) + ";expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/";
             NumberOfProductsInCart1.innerHTML = Number(NumberOfProductsInCart)+1;
+        }
+        var cartOpen = false;
+        function CartClick() {
+            if (cartOpen) {
+                document.getElementById("CartFrame").style.display = "none";
+                cartOpen = false;
+            } else {
+                document.getElementById("CartFrame").style.display = "block";
+                cartOpen = true;
+            }
         }
     </script>
 </head>
@@ -368,7 +389,11 @@
         <a id="ContactUs" href="https://blackwolfjr.github.io/ContactUs/">Contact Us</a>
         <input id="SearchBar" type="text" placeholder="Search for product..">
         <a id="SignIn" href="https://blackwolfjr.github.io/SignIn/">Sign In</a>
-        <button id="Cart"><img src="https://raw.githubusercontent.com/BlackWolfJR/1/main/cart.png" style="width: 64px;height: 64px;"></img><div id="NumberOfProductsInCart">0</div></button>
+        <button onclick="CartClick()" id="Cart"><img src="https://raw.githubusercontent.com/BlackWolfJR/1/main/cart.png" style="width: 64px;height: 64px;"></img><div id="NumberOfProductsInCart">0</div></button>
+    </div>
+    <div id="CartFrame" style="display: none;box-shadow: 0 0 15px rgb(1, 0, 26);position: fixed;right:0px;height: 100vh;width:275px;border-radius:10px;border:2px solid rgb(1, 0, 26);z-index: 1;background-color: white;margin-top:93px;"><div style="justify-content: center;background-image: linear-gradient(90deg,rgb(1,0,26), white);padding-top: 25px;box-shadow: 0 0 2px rgb(1, 0, 26);width: 100%;text-align: center;text-shadow: 0 0 5px black;">
+        <span style="position: relative;bottom: 12px;font-size: 25px;display: block;font-family:Bold;color:white;text-shadow: 0 0 5px black;">My Cart</span></div>
+        <div id="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img src="big.png" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span id="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
     </div>
     <hr style="box-shadow:0 0 1px black;border:1px solid rgb(1,0,26);margin:115px 20px;height: 0;width: 97%;position: absolute;">
     <div id="container">
@@ -414,6 +439,16 @@
             <li style="margin-top:8px;font-size: 18px;">[Nail Debris Storage and Easy Cleaning]Nail clippings from nail clipping are collected in the product's storage box. By pressing the upper part of the window, you can easily open and dump the nail clippings for quick and easy cleaning.</li>
             <li style="margin-top:8px;font-size: 18px;">[What You Get] Package includes 1 x electric nail clipper, 1 x cleaning brush, 1 x C-type charging cable, 1 x instruction manual. Please feel free to contact us if you have any problems about the product.</li>
         </ul>
+        <div style="width:100%;">
+            <div style="display: inline-block;width:300px;">
+                <img src="8.jpg" style="width:300px;height:300px;box-shadow:0 0 1px black;"></img>
+                <p style="text-align: center;">kkjoisfhieuwfhwfuijfewfw</p>
+            </div>
+            <div style="display: inline-block;width:300px;">
+                <img src="8.jpg" style="width:300px;height:300px;box-shadow:0 0 1px black;"></img>
+                <p style="text-align: center;">kkjoisfhieuwfhwfuijfewfw</p>
+            </div>
+        </div>
         <h1 style="text-align:center;font-size: 22px;color:rgb(1,0,26);font-size: 22px;color:rgb(1,0,26);font-family: sans-serif;">Specifications</h1>
         <hr style="margin:-10px 0;"></hr>
         <div style="background-color: azure;position: absolute;width:50%;margin-top:20px;box-shadow: 0px 0 2px black;">
