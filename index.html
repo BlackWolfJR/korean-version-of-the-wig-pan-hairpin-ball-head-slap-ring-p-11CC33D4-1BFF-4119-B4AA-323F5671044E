@@ -348,9 +348,10 @@
                     return hashHex;
                 });
             } ////
-            if (document.cookie.search("NumberOfProducts=")==-1){
+            if (document.cookie.search("NumberOfProducts=")==-1){   
 
-                document.cookie = "NumberOfProducts=${sha256('numofproductsis1')};expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/";
+                const cookieValue = `NumberOfProducts=${sha256("numofproductsis1")}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
+                document.cookie = cookieValue;
                 document.getElementById("productincart").style.display = "inline-block";
                 return;
             }
@@ -364,7 +365,7 @@
 
                 alert("No more than 25 products!")
                 return;
-            }
+            }   
             document.getElementById("productincart").style.display = "inline-block";
             document.cookie = `NumberOfProducts=${sha256('numofproductsis' + NumberOfProductsInCart)};expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
             NumberOfProductsInCart1.innerHTML = Number(NumberOfProductsInCart)+1;
