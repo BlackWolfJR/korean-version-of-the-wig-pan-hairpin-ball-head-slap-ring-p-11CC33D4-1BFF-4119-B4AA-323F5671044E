@@ -371,7 +371,7 @@
                 });
                 return;
             }
-            const NumberOfProductsInCart = (((document.cookie.match(/NumberOfProducts=\s+/)).toString()).split("=")[1]);
+            const NumberOfProductsInCart = (document.cookie.match(/NumberOfProducts=([0-9a-fA-F]+)/).toString().split("=")[1]);
             var NumberOfProductsInCart1 = document.getElementById("NumberOfProductsInCart");
             for (let i = 0; i < 10; i++) {
                 sha256("numofproductsis" + i).then(hash => {
