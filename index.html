@@ -410,7 +410,6 @@
             }
             Promise.all(promises).then(() => {
                 if (!found) {
-                    console.log("balls");
                     return;
                 }
                 if (num>=9){
@@ -427,30 +426,37 @@
                     document.cookie = `NumberOfProducts=${hash};expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
                 });
                 /////////////////////////
-                const promises1 = [];
+                promises.length = 0;
                 const NumberOfProductsSpecificToProduct = (document.cookie.match(/id1products=[0-9a-fA-F]+/).toString()).split("=")[1].toString();
                 let cookieValue2;
                 let found1;
                 let num1;
                 for(let i=1; i <= 25; i++){
 
-                    sha256("numofproductsis" + i).then(hash => {
-                        if (hash.toString()==NumberOfProductsSpecificToProduct.toString()){
+                    promises.push(
+                        sha256("numofproductsis" + i).then(hash => {
+                            if (hash.toString()==NumberOfProductsSpecificToProduct.toString()){
 
-                            found1 = true;
-                            num1 = i;
-                        }
-                    })
+                                found1 = true;
+                                num1 = i;
+                            }
+                        })
+                    )
                 }
-                promises1.push(
-                    sha256("numofproductsis" + (num1+1)).then(hash1 => {
-                        cookieValue2 = `id1products=${hash1}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
-                    })
-                )
-                Promise.all(promises1).then(() => {
+                Promise.all(promises).then(() => {
 
-                    document.cookie = cookieValue2;
-                    document.getElementById("numofspecificproductincart").innerHTML = num1+1;
+                    promises.length = 0;
+                    promises.push(
+                        sha256("numofproductsis" + (num1+1)).then(hash1 => {
+                            cookieValue2 = `id1products=${hash1}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
+                        })
+                    )
+                    Promise.all(promises).then(() => {
+
+                        document.cookie = cookieValue2;
+                        document.getElementById("numofspecificproductincart").innerHTML = num1+1;
+                    })
+                    
                 })
                 /////////////////////////
                 NumberOfProductsInCart1.innerHTML = num+1;
