@@ -378,22 +378,18 @@
             let found;
             const promises = [];
             for (let i = 1; i <= 25; i++) {
-                promises.push(
-                    sha256("numofproductsis" + i).then(hash => {
-                        if (hash.toString() === NumberOfProductsInCart.toString()) {
-                            found = true;
-                            let num = i;
-                            console.log("yes " + num);
-                        }
-                    })
-            );
+                sha256("numofproductsis" + i).then(hash => {
+                    if (hash.toString() === NumberOfProductsInCart.toString()) {
+                        found = true;
+                        let num = i;
+                        console.log("yes " + num);
+                    }
+                });
             }
-            Promise.all(promises).then(() => {
-                if (!found) {
-                    console.log("balls");
-                    return;
-                }
-            });
+            if (!found) {
+                console.log("balls");
+                return;
+            }
             if (num>=9){
 
                 NumberOfProductsInCart1.style="width: 21px;height: 21px;margin-top: 18px;right:37px;"
