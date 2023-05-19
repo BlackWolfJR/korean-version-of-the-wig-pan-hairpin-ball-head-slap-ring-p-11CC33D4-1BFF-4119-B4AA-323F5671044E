@@ -370,7 +370,25 @@
         }
         function AddToCart(){
 
-            if (document.cookie.search("NumberOfProducts=")==-1){   
+            if (document.cookie.search("NumberOfProducts=")==-1 && document.cookie.search("productdata=")==-1){   
+
+                sha256("numofproductsis1").then(hash => {
+                    const promises = [];
+                    const cookieValue1 = `NumberOfProducts=${hash}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
+                    promises.push(sha256("id1productis.1").then(hash1 => {
+                        let cookieValue2 = `productdata=${hash1}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
+                    }))
+                    Promise.all(promises).then(() => {
+
+                        document.cookie = cookieValue2;
+                    })
+                    document.cookie = cookieValue1;
+                    document.getElementById("NumberOfProductsInCart").innerHTML = "1";
+                    document.getElementById("productincart").style.display = "inline-block";
+                });
+                return;
+            }
+            if (document.cookie.search("NumberOfProducts=")==-1 && document.cookie.search("productdata=")!=-1){   
 
                 sha256("numofproductsis1").then(hash => {
                     const cookieValue = `NumberOfProducts=${hash}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
