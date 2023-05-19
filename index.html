@@ -305,7 +305,7 @@
             }
         })
         function sha256(input) { //// hash func
-                const encoder = new TextEncoder();
+                const encoder = new TextEncoder();  
                 const data = encoder.encode(input);
                 return crypto.subtle.digest('SHA-256', data).then(buffer => {
                     const hashArray = Array.from(new Uint8Array(buffer));
@@ -378,6 +378,8 @@
             let found;
             for (let i = 1; i <= 25; i++) {
                 sha256("numofproductsis" + i).then(hash => {
+                    console.log(hash.toString());
+                    console.log(NumberOfProductsInCart);
                     if (hash.toString()==NumberOfProductsInCart.toString()) {
                         let found = true;
                         let num = i;
