@@ -291,6 +291,7 @@
                 return;
             }
             const NumberOfProductsInCart = (document.cookie.match(/NumberOfProducts=[0-9a-fA-F]+/).toString()).split("=")[1].toString();
+            let found;
             for (let i = 1; i <= 25; i++) {
                 sha256("numofproductsis" + i).then(hash => {
                     if (hash.toString()==NumberOfProductsInCart.toString()) {
