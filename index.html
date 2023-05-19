@@ -291,18 +291,25 @@
                 return;
             }
             const NumberOfProductsInCart = (document.cookie.match(/NumberOfProducts=[0-9a-fA-F]+/).toString()).split("=")[1].toString();
-            let found;
+            var found;
+            var num;
+            const promises = [];
             for (let i = 1; i <= 25; i++) {
-                sha256("numofproductsis" + i).then(hash => {
-                    if (hash.toString()==NumberOfProductsInCart.toString()) {
-                        let found = true;
-                        let num = i;
-                    }
-                })
+                promises.push(
+                    sha256("numofproductsis" + i).then(hash => {
+                        if (hash.toString()==NumberOfProductsInCart.toString()) {
+                            found = true;
+                            num = i;
+                        }
+                    })
+                )
             }
-            if (found==true){
-                document.getElementById("NumberOfProductsInCart").innerHTML = i;
-            }
+            Promise.all(promises).then(() => {
+
+                if (found==true){
+                    document.getElementById("NumberOfProductsInCart").innerHTML = i;
+                }
+            })
         })
         function sha256(input) { //// hash func
                 const encoder = new TextEncoder();  
@@ -375,8 +382,8 @@
             }
             const NumberOfProductsInCart = (document.cookie.match(/NumberOfProducts=[0-9a-fA-F]+/).toString()).split("=")[1].toString();
             var NumberOfProductsInCart1 = document.getElementById("NumberOfProductsInCart");
-            let found;
-            let num;
+            var found;
+            var num;
             const promises = [];
             for (let i = 1; i <= 25; i++) {
                 promises.push(
