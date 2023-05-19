@@ -370,30 +370,25 @@
         }
         function AddToCart(){
 
+            if (document.cookie.search("NumberOfProducts=")==-1 && document.cookie.search("productdata=")!=-1){
+                return;
+            }
             if (document.cookie.search("NumberOfProducts=")==-1 && document.cookie.search("productdata=")==-1){   
 
                 sha256("numofproductsis1").then(hash => {
                     const promises = [];
                     const cookieValue1 = `NumberOfProducts=${hash}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
-                    promises.push(sha256("id1productis.1").then(hash1 => {
-                        let cookieValue2 = `productdata=${hash1}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
+                    var cookieValue2;
+                    document.cookie = cookieValue1;
+                    promises.push(sha256("numofproductsis1").then(hash1 => {
+                        cookieValue2 = `id1products=${hash1}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
                     }))
                     Promise.all(promises).then(() => {
 
                         document.cookie = cookieValue2;
                     })
-                    document.cookie = cookieValue1;
                     document.getElementById("NumberOfProductsInCart").innerHTML = "1";
-                    document.getElementById("productincart").style.display = "inline-block";
-                });
-                return;
-            }
-            if (document.cookie.search("NumberOfProducts=")==-1 && document.cookie.search("productdata=")!=-1){   
-
-                sha256("numofproductsis1").then(hash => {
-                    const cookieValue = `NumberOfProducts=${hash}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
-                    document.cookie = cookieValue;
-                    document.getElementById("NumberOfProductsInCart").innerHTML = "1";
+                    document.getElementById("numofspecificproductincart").innerHTML = "1";
                     document.getElementById("productincart").style.display = "inline-block";
                 });
                 return;
@@ -431,6 +426,26 @@
                 sha256("numofproductsis" + (num+1)).then(hash => {
                     document.cookie = `NumberOfProducts=${hash};expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
                 });
+                /////////////////////////
+                const NumberOfProductsSpecificToProduct = (document.cookie.match(/id1products=[0-9a-fA-F]+/).toString()).split("=")[1].toString();
+                var found1;
+                var num1;
+                for(let i=1; i <= 25; i++){
+
+                    sha256("numofproductsis" + i).then(hash => {
+                        if (hash.toString()==NumberOfProductsSpecificToProduct.toString()){
+
+                            found1 = true;
+                            num1 = i;
+                        }
+                    })
+                }
+                sha256("numofproductsis" + (num1+1)).then(hash1 => {
+                    let cookieValue2 = `id1products=${hash1}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
+                })
+                document.cookie = cookieValue2;
+                document.getElementById("numofspecificproductincart").innerHTML = num;
+                /////////////////////////
                 NumberOfProductsInCart1.innerHTML = num+1;
             });
         }
