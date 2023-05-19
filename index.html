@@ -376,19 +376,24 @@
             const NumberOfProductsInCart = (document.cookie.match(/NumberOfProducts=[0-9a-fA-F]+/).toString()).split("=")[1].toString();
             var NumberOfProductsInCart1 = document.getElementById("NumberOfProductsInCart");
             let found;
+            const promises = [];
             for (let i = 1; i <= 25; i++) {
-                sha256("numofproductsis" + i).then(hash => {
-                    if (hash.toString()==NumberOfProductsInCart.toString()) {
-                        found = true;
-                        let num = i;
-                        console.log("yes " + i);
-                    }
-                })
+                promises.push(
+                    sha256("numofproductsis" + i).then(hash => {
+                        if (hash.toString() === NumberOfProductsInCart.toString()) {
+                            found = true;
+                            let num = i;
+                            console.log("yes " + i);
+                        }
+                    })
+            );
             }
-            if (found!=true){
-                console.log("balls");
-                return;
-            }
+            Promise.all(promises).then(() => {
+                if (!found) {
+                    console.log("balls");
+                    return;
+                }
+            });
             if (i>=9){
 
                 NumberOfProductsInCart1.style="width: 21px;height: 21px;margin-top: 18px;right:37px;"
