@@ -376,6 +376,7 @@
             let found;
             for (let i = 1; i <= 25; i++) {
                 sha256("numofproductsis" + i).then(hash => {
+                    console.log(hash.toString(), NumberOfProductsInCart);
                     if (hash.toString()==NumberOfProductsInCart) {
                         let found = true;
                         let num = i;
