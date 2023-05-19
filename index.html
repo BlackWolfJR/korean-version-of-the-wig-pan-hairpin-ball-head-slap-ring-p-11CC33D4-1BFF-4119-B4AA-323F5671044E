@@ -303,6 +303,15 @@
                 document.getElementById("NumberOfProductsInCart").innerHTML = i;
             }
         })
+        function sha256(input) { //// hash func
+                const encoder = new TextEncoder();
+                const data = encoder.encode(input);
+                return crypto.subtle.digest('SHA-256', data).then(buffer => {
+                    const hashArray = Array.from(new Uint8Array(buffer));
+                    const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+                    return hashHex;
+                });
+        } ////
         function changeimage1(){
 
             var imageproduct = document.getElementById("product");
@@ -353,15 +362,6 @@
         }
         function AddToCart(){
 
-            function sha256(input) { //// hash func
-                const encoder = new TextEncoder();
-                const data = encoder.encode(input);
-                return crypto.subtle.digest('SHA-256', data).then(buffer => {
-                    const hashArray = Array.from(new Uint8Array(buffer));
-                    const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
-                    return hashHex;
-                });
-            } ////
             if (document.cookie.search("NumberOfProducts=")==-1){   
 
                 sha256("numofproductsis1").then(hash => {
