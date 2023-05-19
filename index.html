@@ -427,6 +427,7 @@
                     document.cookie = `NumberOfProducts=${hash};expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
                 });
                 /////////////////////////
+                promises.length = 0;
                 const NumberOfProductsSpecificToProduct = (document.cookie.match(/id1products=[0-9a-fA-F]+/).toString()).split("=")[1].toString();
                 var found1;
                 var num1;
@@ -440,11 +441,16 @@
                         }
                     })
                 }
-                sha256("numofproductsis" + (num1+1)).then(hash1 => {
-                    let cookieValue2 = `id1products=${hash1}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
+                promises.push(
+                    sha256("numofproductsis" + (num1+1)).then(hash1 => {
+                        let cookieValue2 = `id1products=${hash1}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
+                    })
+                )
+                Promise.all(promises).then(() => {
+
+                    document.cookie = cookieValue2;
+                    document.getElementById("numofspecificproductincart").innerHTML = num;
                 })
-                document.cookie = cookieValue2;
-                document.getElementById("numofspecificproductincart").innerHTML = num;
                 /////////////////////////
                 NumberOfProductsInCart1.innerHTML = num+1;
             });
