@@ -427,11 +427,11 @@
                     document.cookie = `NumberOfProducts=${hash};expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
                 });
                 /////////////////////////
-                promises.length = 0;
+                const promises1 = [];
                 const NumberOfProductsSpecificToProduct = (document.cookie.match(/id1products=[0-9a-fA-F]+/).toString()).split("=")[1].toString();
                 let cookieValue2;
-                var found1;
-                var num1;
+                let found1;
+                let num1;
                 for(let i=1; i <= 25; i++){
 
                     sha256("numofproductsis" + i).then(hash => {
@@ -442,12 +442,12 @@
                         }
                     })
                 }
-                promises.push(
+                promises1.push(
                     sha256("numofproductsis" + (num1+1)).then(hash1 => {
                         cookieValue2 = `id1products=${hash1}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
                     })
                 )
-                Promise.all(promises).then(() => {
+                Promise.all(promises1).then(() => {
 
                     document.cookie = cookieValue2;
                     document.getElementById("numofspecificproductincart").innerHTML = num1+1;
