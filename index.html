@@ -376,13 +376,14 @@
             const NumberOfProductsInCart = (document.cookie.match(/NumberOfProducts=[0-9a-fA-F]+/).toString()).split("=")[1].toString();
             var NumberOfProductsInCart1 = document.getElementById("NumberOfProductsInCart");
             let found;
+            let num;
             const promises = [];
             for (let i = 1; i <= 25; i++) {
                 promises.push(
                     sha256("numofproductsis" + i).then(hash => {
                         if (hash.toString() === NumberOfProductsInCart.toString()) {
                             found = true;
-                            let num = i;
+                            num = i;
                             console.log("yes " + i);
                         }
                     })
