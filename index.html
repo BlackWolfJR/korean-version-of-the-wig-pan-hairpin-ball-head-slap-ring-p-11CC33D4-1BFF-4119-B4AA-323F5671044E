@@ -379,14 +379,13 @@
             for (let i = 1; i <= 25; i++) {
                 sha256("numofproductsis" + i).then(hash => {
                     if (hash.toString()==NumberOfProductsInCart.toString()) {
-                        let found = true;
+                        found = true;
                         let num = i;
                         console.log("yes " + i);
                     }
                 })
             }
             if (found!=true){
-                console.log("balls");
                 return;
             }
             if (i>=9){
