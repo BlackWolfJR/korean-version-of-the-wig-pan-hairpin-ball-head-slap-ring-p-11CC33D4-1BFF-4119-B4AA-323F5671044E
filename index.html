@@ -375,7 +375,6 @@
                 sha256("numofproductsis1").then(hash => {
                     const cookieValue = `NumberOfProducts=${hash}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
                     document.cookie = cookieValue;
-                    document.getElementById("NumberOfProductsInCart").innerHTML = "1";
                     document.getElementById("productincart").style.display = "inline-block";
                 });
                 return;
