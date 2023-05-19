@@ -376,15 +376,14 @@
             const NumberOfProductsInCart = (document.cookie.match(/NumberOfProducts=[0-9a-fA-F]+/).toString()).split("=")[1].toString();
             var NumberOfProductsInCart1 = document.getElementById("NumberOfProductsInCart");
             let found;
-            let num;
             const promises = [];
             for (let i = 1; i <= 25; i++) {
                 promises.push(
                     sha256("numofproductsis" + i).then(hash => {
                         if (hash.toString() === NumberOfProductsInCart.toString()) {
                             found = true;
-                            num = i;
-                            console.log("yes " + i);
+                            let num = i;
+                            console.log("yes " + num);
                         }
                     })
             );
@@ -395,11 +394,11 @@
                     return;
                 }
             });
-            if (i>=9){
+            if (num>=9){
 
                 NumberOfProductsInCart1.style="width: 21px;height: 21px;margin-top: 18px;right:37px;"
             }
-            if (i>=25){
+            if (num>=25){
 
                 alert("No more than 25 products!")
                 return;
@@ -409,7 +408,7 @@
             sha256("numofproductsis" + i).then(hash => {
                 document.cookie = `NumberOfProducts=${hash};expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
             });
-            NumberOfProductsInCart1.innerHTML = i+1;
+            NumberOfProductsInCart1.innerHTML = num+1;
         }
         var cartOpen = false;
         function CartClick() {
