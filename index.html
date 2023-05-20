@@ -451,7 +451,7 @@
                         }
                     })
                     document.getElementsByClassName("imageincart")[balls].getElementById("numofspecificproductincart").innerHTML = "1";
-                    document.getElementsByClassName("imageincart")[balls].parentNode.style.display = "inline-block";
+                    document.getElementsByClassName("imageincart")[balls].parentElement.style.display = "inline-block";
                     document.getElementById("NumberOfProductsInCart").innerHTML = "1";
                 });
                 return;
@@ -520,7 +520,7 @@
 
                             if (document.getElementsByClassName("imageincart")[t].src=="https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png"){
 
-                                document.getElementsByClassName("imageincart")[t].parentNode.getElementsByClassName("numofspecificproductincart").innerHTML = num1+1;
+                                document.getElementsByClassName("imageincart")[t].parentElement.getElementsByClassName("numofspecificproductincart").innerHTML = num1+1;
                                 imagefound = true;
                             }
                         }
@@ -530,7 +530,7 @@
                                 if (document.getElementsByClassName("imageincart")[t].src==""){
 
                                     document.getElementsByClassName("imageincart")[t].src=="https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png";
-                                    document.getElementsByClassName("imageincart")[t].parentNode.getElementsByClassName("numofspecificproductincart")[0].innerHTML = num1+1;
+                                    document.getElementsByClassName("imageincart")[t].parentElement.getElementsByClassName("numofspecificproductincart")[0].innerHTML = num1+1;
                                 }
                             }
                         }
