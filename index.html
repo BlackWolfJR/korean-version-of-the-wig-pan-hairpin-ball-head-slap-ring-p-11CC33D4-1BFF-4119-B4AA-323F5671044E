@@ -484,7 +484,6 @@
                     alert("No more than 25 products!")
                     return;
                 }
-                document.getElementById("productincart").style.display = "inline-block";
                 sha256("numofproductsis" + (num+1)).then(hash => {
                     document.cookie = `NumberOfProducts=${hash};expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
                 });
@@ -516,8 +515,18 @@
                     Promise.all(promises).then(() => {
 
                         document.cookie = cookieValue2;
-                        document.getElementById("imageincart").src = "https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png";
-                        document.getElementById("numofspecificproductincart").innerHTML = num1+1;
+                        var imagenotfound = false;
+                        for(var t=0;t<25;t++){
+
+                            if (document.getElementsByClassName("imageincart")[t].src=="https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png"){
+
+                                imagenotfound = true;
+                            }
+                        }
+                        if (imagenotfound){
+                            document.getElementsByClassName("imageincart")[t].src=="https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png";
+                            document.getElementsByClassName("imageincart")[t].parentNode.getElementsByClassName("numofspecificproductincart")[0].innerHTML = num1+1;
+                        }
                     })
                     
                 })
