@@ -449,10 +449,10 @@
                                 break;
                             }
                         }
+                        document.getElementsByClassName("imageincart")[balls].parentElement.getElementsByClassName("numofspecificproductincart")[0].innerHTML = "1";
+                        document.getElementsByClassName("imageincart")[balls].parentElement.style.display = "inline-block";
+                        document.getElementById("NumberOfProductsInCart").innerHTML = "1";
                     })
-                    document.getElementsByClassName("imageincart")[balls].parentElement.getElementsByClassName("numofspecificproductincart")[0].innerHTML = "1";
-                    document.getElementsByClassName("imageincart")[balls].parentElement.style.display = "inline-block";
-                    document.getElementById("NumberOfProductsInCart").innerHTML = "1";
                 });
                 return;
             }
