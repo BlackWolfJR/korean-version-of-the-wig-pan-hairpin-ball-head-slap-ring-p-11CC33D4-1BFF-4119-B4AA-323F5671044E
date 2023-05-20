@@ -428,11 +428,9 @@
                 });
                 /////////////////////////
                 promises.length = 0;
-                const encodedurl = encodeURIComponent("https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png");
-                const regexPattern = new RegExp(`${encodedurl}=([0-9a-fA-F]+)`);
+                const regexPattern = new RegExp(`${encodeURIComponent("https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png")}=[0-9a-fA-F]+`);
                 const NumberOfProductsSpecificToProduct = (document.cookie.match(regexPattern)).toString().split("=")[1].toString();
                 let cookieValue2;
-                let found1;
                 let num1;
                 for(let i=1; i <= 25; i++){
 
@@ -440,8 +438,8 @@
                         sha256("numofproductsis" + i).then(hash => {
                             if (hash.toString()==NumberOfProductsSpecificToProduct.toString()){
 
-                                found1 = true;
                                 num1 = i;
+                                console.log("ballllllllllls", i);
                             }
                         })
                     )
