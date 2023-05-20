@@ -292,8 +292,45 @@
                 return;
             }
             if (document.cookie.search("https")!=-1){
-                var imageurl = (document.cookie.match(/https[^;]+/).toString()).split("=")[0].toString();
-                var numberofproductsincart = (document.cookie.match(/https[^;]+/).toString()).split("=")[1].toString();
+                const httpsincookies= (document.cookie.match(/https[^;]+/g));
+                const class1 = document.getElementsByClassName("productincart");
+                for (let p=0;p<httpsincookies.length;p++){
+
+                    for (let i=0;i<class1.length;i++){
+
+                        if (class1[i].getElementsByClassName("imageincart").src!=""){
+                            const promises1 = []
+                            var found;
+                            var num;
+                            class1[i].getElementsByClassName("imageincart").src = decodeURIComponent(httpsincookies[p]);
+                            for (let ii = 1; ii <= 25; ii++) {
+                                promises1.push(
+                                    sha256("numofproductsis" + ii).then(hash => {
+                                        if (hash.toString()==(httpsincookies[p].toString()).split("=")[1].toString()) {
+                                            found = true;
+                                            num = ii;
+                                        }
+                                    })
+                                )
+                            }
+                            Promise.all(promises).then(() => {
+
+                                if (found){
+                                    class1[i].getElementsByClassName("numofspecificproductincart").innerHTML = num;
+                                    class1[i].style.display = "inline-block";
+                                    promises1.length = 0;
+                                }
+                            })
+                            if (found){
+                                break;
+                            }
+                            
+                        }
+
+                    }
+
+                }
+                var numberofproductsincart = (document.cookie.match(/https[^;]+/g).toString()).split("=")[1].toString();
                 var num1;
                 for(let i=1; i <= 25; i++){
                     promises.push(
@@ -312,8 +349,8 @@
                 })
             }
             const NumberOfProductsInCart = (document.cookie.match(/NumberOfProducts=[0-9a-fA-F]+/).toString()).split("=")[1].toString();
-            let found;
-            let num;
+            var found;
+            var num;
             promises.length = 0;
             for (let i = 1; i <= 25; i++) {
                 promises.push(
@@ -508,7 +545,31 @@
     </div>
     <div id="CartFrame" style="display: none;box-shadow: 0 0 15px rgb(1, 0, 26);position: fixed;right:0px;height: 100vh;width:275px;border-radius:10px;border:2px solid rgb(1, 0, 26);z-index: 1;background-color: white;margin-top:93px;"><div style="justify-content: center;background-image: linear-gradient(90deg,rgb(1,0,26), white);padding-top: 25px;box-shadow: 0 0 2px rgb(1, 0, 26);width: 100%;text-align: center;text-shadow: 0 0 5px black;">
         <span style="position: relative;bottom: 12px;font-size: 25px;display: block;font-family:Bold;color:white;text-shadow: 0 0 5px black;">My Cart</span></div>
-        <div id="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img id="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span id="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div class="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
     </div>
     <hr style="box-shadow:0 0 1px black;border:1px solid rgb(1,0,26);margin:115px 20px;height: 0;width: 97%;position: absolute;">
     <div id="container">
