@@ -444,11 +444,16 @@
                     Promise.all(promises).then(() => {
 
                         document.cookie = cookieValue2;
-                        document.getElementById("imageincart").src = "https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png";
+                        for(let i=0;i<25;i++){
+                            if (document.getElementsByClassName("imageincart")[i].src==""){
+                                var balls=i;
+                                document.getElementsByClassName("imageincart")[i].src = "https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png";
+                            }
+                        }
                     })
+                    document.getElementsByClassName("imageincart")[balls].getElementById("numofspecificproductincart").innerHTML = "1";
+                    document.getElementsByClassName("imageincart")[balls].parentNode.style.display = "inline-block";
                     document.getElementById("NumberOfProductsInCart").innerHTML = "1";
-                    document.getElementById("numofspecificproductincart").innerHTML = "1";
-                    document.getElementById("productincart").style.display = "inline-block";
                 });
                 return;
             }
