@@ -444,13 +444,13 @@
                         document.cookie = cookieValue2;
                         for(let i=0;i<25;i++){
                             if (document.getElementsByClassName("imageincart")[i].src==""){
-                                var balls=i;
                                 document.getElementsByClassName("imageincart")[i].src = "https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png";
+                                var balls=i;
                                 break;
                             }
                         }
                     })
-                    document.getElementsByClassName("imageincart")[balls].getElementById("numofspecificproductincart").innerHTML = "1";
+                    document.getElementsByClassName("imageincart")[balls].parentElement.getElementById("numofspecificproductincart").innerHTML = "1";
                     document.getElementsByClassName("imageincart")[balls].parentElement.style.display = "inline-block";
                     document.getElementById("NumberOfProductsInCart").innerHTML = "1";
                 });
@@ -524,7 +524,7 @@
                                 imagefound = true;
                             }
                         }
-                        if (imagefound!=true){
+                        if (imagefound==false){
                             for(let i=0;i<25;i++){
 
                                 if (document.getElementsByClassName("imageincart")[t].src==""){
