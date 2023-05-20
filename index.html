@@ -299,18 +299,17 @@
                     promises.push(
                         sha256("numofproductsis" + i).then(hash => {
                             if (hash.toString()==numberofproductsincart.toString()){
-
-                                console.log("yha ta a dar!");
                                 num1 = i;
                             }
                         })
                     )
                 }
-                console.log(imageurl);
-                console.log(num1);
-                document.getElementById("productincart").src = imageurl;
-                document.getElementById("productincart").innerHTML = num1;
-                document.getElementById("productincart").style.display = "inline-block";
+                Promise.all(promises).then(() => {
+
+                    document.getElementById("productincart").src = imageurl;
+                    document.getElementById("productincart").innerHTML = num1;
+                    document.getElementById("productincart").style.display = "inline-block";
+                })
             }
             const NumberOfProductsInCart = (document.cookie.match(/NumberOfProducts=[0-9a-fA-F]+/).toString()).split("=")[1].toString();
             let found;
