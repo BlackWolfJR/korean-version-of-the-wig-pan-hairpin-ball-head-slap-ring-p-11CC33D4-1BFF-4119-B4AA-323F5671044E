@@ -304,9 +304,9 @@
                         })
                     )
                 }
-                console.log(imageurl, numberofproductsincart);
                 Promise.all(promises).then(() => {
 
+                    console.log(decodeURIComponent(imageurl), num1);
                     document.getElementById("productincart").src = decodeURIComponent(imageurl);
                     document.getElementById("productincart").innerHTML = num1;
                     document.getElementById("productincart").style.display = "inline-block";
