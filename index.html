@@ -414,10 +414,10 @@
         }
         function AddToCart(){
 
-            if (document.cookie.search("NumberOfProducts=")==-1 && document.cookie.search("productdata=")!=-1){
+            if (document.cookie.search("NumberOfProducts=")==-1 && document.cookie.search(encodeURIComponent("https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png"))!=-1){
                 return;
             }
-            if (document.cookie.search("NumberOfProducts=")==-1 && document.cookie.search("productdata=")==-1){   
+            if (document.cookie.search("NumberOfProducts=")==-1 && document.cookie.search(encodeURIComponent("https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png"))==-1){   
 
                 sha256("numofproductsis1").then(hash => {
                     const promises = [];
@@ -434,6 +434,7 @@
                             if (document.getElementsByClassName("imageincart")[i].src==""){
                                 var balls=i;
                                 document.getElementsByClassName("imageincart")[i].src = "https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png";
+                                break;
                             }
                         }
                     })
