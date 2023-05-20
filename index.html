@@ -299,9 +299,9 @@
                     for (let i=0;i<class1.length;i++){
 
                         if (class1[i].getElementsByClassName("imageincart")[0].src!=""){
-                            const promises1 = []
-                            var found;
-                            var num;
+                            const promises1 = [];
+                            let found;
+                            let num;
                             class1[i].getElementsByClassName("imageincart")[0].src = decodeURIComponent(httpsincookies[p]);
                             for (let ii = 1; ii <= 25; ii++) {
                                 promises1.push(
