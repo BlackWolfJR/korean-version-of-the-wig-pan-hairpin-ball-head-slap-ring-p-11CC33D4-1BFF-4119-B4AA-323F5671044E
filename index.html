@@ -326,12 +326,16 @@
                                     found = false;
                                 }
                             })
+                            let ohyes;
                             setTimeout(function(){
-                                return
+                                ohyes=true;
                             },3500);
-                            if (found){
+                            while(true){
 
-                                break;
+                                if (ohyes && found){
+
+                                    break;
+                                }
                             }
                             
                         }
