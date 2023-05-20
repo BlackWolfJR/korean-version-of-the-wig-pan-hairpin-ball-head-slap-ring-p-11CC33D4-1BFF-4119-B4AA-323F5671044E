@@ -291,26 +291,7 @@
             if (document.cookie.search("NumberOfProducts=")==-1){
                 return;
             }
-            if (document.cookie.search("https")!=-1){
-                var imageurl = (document.cookie.match(/https[^;]+/).toString()).split("=")[0].toString();
-                var numberofproductsincart = (document.cookie.match(/https[^;]+/).toString()).split("=")[1].toString();
-                var num1;
-                for(let i=1; i <= 25; i++){
-                    promises.push(
-                        sha256("numofproductsis" + i).then(hash => {
-                            if (hash.toString()==numberofproductsincart.toString()){
-                                num1 = i;
-                            }
-                        })
-                    )
-                }
-                Promise.all(promises).then(() => {
-
-                    
-                    document.getElementById("productincart").innerHTML = num1;
-                    document.getElementById("productincart").style.display = "inline-block";
-                })
-            }
+            
             const NumberOfProductsInCart = (document.cookie.match(/NumberOfProducts=[0-9a-fA-F]+/).toString()).split("=")[1].toString();
             let found;
             let num;
