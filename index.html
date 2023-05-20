@@ -302,6 +302,7 @@
                             const promises1 = [];
                             let found;
                             let num;
+                            let debounce = true;
                             class1[i].getElementsByClassName("imageincart")[0].src = decodeURIComponent(httpsincookies[p]);
                             for (let ii = 1; ii <= 25; ii++) {
                                 promises1.push(
@@ -320,11 +321,23 @@
                                     class1[i].getElementsByClassName("numofspecificproductincart")[0].innerHTML = num;
                                     class1[i].style.display = "inline-block";
                                     promises1.length = 0;
-                                } else if(found!=true){
-                                    promises1.length = 0;
-                                    return;
+                                } else {
+
+                                    found = false;
                                 }
                             })
+                            while(true){
+
+                                if (found==true || found==false){
+
+                                    debounce = false
+                                }
+
+                            }
+                            if (found){
+
+                                break;
+                            }
                             
                         }
 
