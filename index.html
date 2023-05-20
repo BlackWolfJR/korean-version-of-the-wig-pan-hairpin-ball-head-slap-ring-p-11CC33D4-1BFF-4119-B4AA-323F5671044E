@@ -326,15 +326,9 @@
                                     found = false;
                                 }
                             })
-                            async function checkFoundStatus() {
-                                while (true) {
-                                    if (found === true || found === false) {
-                                        break;
-                                    }
-                                    await new Promise(resolve => setTimeout(resolve, 100));
-                                }
-                            }
-                            checkFoundStatus();
+                            setTimeout(function(){
+                                return
+                            },3500);
                             if (found){
 
                                 break;
