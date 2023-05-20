@@ -326,17 +326,14 @@
                                     found = false;
                                 }
                             })
-                            while(debounce){
+                            setTimeout(function(){
 
-                                if (found==true || found==false){
+                                if (found){
 
-                                    debounce = false
+                                    break;
                                 }
+                            },2000);
 
-                            }
-                            if (found){
-
-                                break;
                             }
                             
                         }
