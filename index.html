@@ -309,6 +309,7 @@
                                         if (hash.toString()==(httpsincookies[p].toString()).split("=")[1].toString()) {
                                             found = true;
                                             num = ii;
+                                            var imageurl = decodeURIComponent(httpsincookies[p].toString()).split("=")[0].toString();
                                         }
                                     })
                                 )
@@ -343,7 +344,7 @@
                 }
                 Promise.all(promises).then(() => {
 
-                    document.getElementById("imageincart").src = decodeURIComponent(imageurl);
+                    document.getElementById("imageincart").src = imageurl;
                     document.getElementById("numofspecificproductincart").innerHTML = num1;
                     document.getElementById("productincart").style.display = "inline-block";
                 })
