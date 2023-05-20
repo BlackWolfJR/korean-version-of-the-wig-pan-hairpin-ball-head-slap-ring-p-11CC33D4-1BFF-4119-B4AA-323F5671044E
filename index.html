@@ -293,8 +293,8 @@
             }
             if (document.cookie.search("https")!=-1){
                 console.log("Hell yeah it works!");
-                var imageurl = (document.cookie.match(/https.+=.+;/).toString().slice(0,-1).toString()).split("=")[1].toString();
-                var numberofproductsincart = (document.cookie.match(/https.+=.+;/).toString().slice(0,-1).toString()).split("=")[2].toString();
+                var imageurl = ((((document.cookie.match(/https.+=.+;/)).toString()).slice(0,-1)).toString().split("=")[1]).toString();
+                var numberofproductsincart = ((((document.cookie.match(/https.+=.+;/)).toString()).slice(0,-1)).toString().split("=")[2]).toString();
                 var num1;
                 for(let i=1; i <= 25; i++){
                     promises.push(
