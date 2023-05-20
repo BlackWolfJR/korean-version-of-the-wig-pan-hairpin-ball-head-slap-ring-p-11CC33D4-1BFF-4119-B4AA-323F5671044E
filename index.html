@@ -381,11 +381,12 @@
                     var cookieValue2;
                     document.cookie = cookieValue1;
                     promises.push(sha256("numofproductsis1").then(hash1 => {
-                        cookieValue2 = `id1products=${hash1}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
+                        cookieValue2 = `${encodeURIComponent("https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png")}=${hash1}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
                     }))
                     Promise.all(promises).then(() => {
 
                         document.cookie = cookieValue2;
+                        document.getElementById("imageincart").style.src = "https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png";
                     })
                     document.getElementById("NumberOfProductsInCart").innerHTML = "1";
                     document.getElementById("numofspecificproductincart").innerHTML = "1";
@@ -427,7 +428,9 @@
                 });
                 /////////////////////////
                 promises.length = 0;
-                const NumberOfProductsSpecificToProduct = (document.cookie.match(/id1products=[0-9a-fA-F]+/).toString()).split("=")[1].toString();
+                const encodedurl = encodeURIComponent("https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png");
+                const regexPattern = new RegExp(`${encodedurl}=([0-9a-fA-F]+)`);
+                const NumberOfProductsSpecificToProduct = (document.cookie.match(regexPattern)).toString().split("=")[1].toString();
                 let cookieValue2;
                 let found1;
                 let num1;
@@ -448,12 +451,13 @@
                     promises.length = 0;
                     promises.push(
                         sha256("numofproductsis" + (num1+1)).then(hash1 => {
-                            cookieValue2 = `id1products=${hash1}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
+                            cookieValue2 = `${encodeURIComponent("https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png")}=${hash1}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
                         })
                     )
                     Promise.all(promises).then(() => {
 
                         document.cookie = cookieValue2;
+                        document.getElementById("imageincart").style.src = "https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png";
                         document.getElementById("numofspecificproductincart").innerHTML = num1+1;
                     })
                     
@@ -486,7 +490,7 @@
     </div>
     <div id="CartFrame" style="display: none;box-shadow: 0 0 15px rgb(1, 0, 26);position: fixed;right:0px;height: 100vh;width:275px;border-radius:10px;border:2px solid rgb(1, 0, 26);z-index: 1;background-color: white;margin-top:93px;"><div style="justify-content: center;background-image: linear-gradient(90deg,rgb(1,0,26), white);padding-top: 25px;box-shadow: 0 0 2px rgb(1, 0, 26);width: 100%;text-align: center;text-shadow: 0 0 5px black;">
         <span style="position: relative;bottom: 12px;font-size: 25px;display: block;font-family:Bold;color:white;text-shadow: 0 0 5px black;">My Cart</span></div>
-        <div id="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img src="big.png" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span id="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        <div id="productincart" style="display:none;margin:5px;border:1px solid blue;width:95%;height:65px;"><img id="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span id="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
     </div>
     <hr style="box-shadow:0 0 1px black;border:1px solid rgb(1,0,26);margin:115px 20px;height: 0;width: 97%;position: absolute;">
     <div id="container">
