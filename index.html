@@ -326,14 +326,18 @@
                                     found = false;
                                 }
                             })
-                            setTimeout(function(){
-
-                                if (found){
-
-                                    break;
+                            async function checkFoundStatus() {
+                                while (true) {
+                                    if (found === true || found === false) {
+                                        break;
+                                    }
+                                    await new Promise(resolve => setTimeout(resolve, 100));
                                 }
-                            },2000);
+                            }
+                            checkFoundStatus();
+                            if (found){
 
+                                break;
                             }
                             
                         }
