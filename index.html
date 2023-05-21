@@ -329,7 +329,7 @@
                                     done = false;
                                 }
                             })
-                            let testcondition;
+                            let testcondition = 10;
                             let done;
                             let interval = setInterval(function()   {
                                 if (done && found){
@@ -342,6 +342,7 @@
                                     clearInterval(interval);
                                 }
                             },100);
+                            console.log(testcondition);
                             if (testcondition){
 
                                 console.log("breaking loop!");
