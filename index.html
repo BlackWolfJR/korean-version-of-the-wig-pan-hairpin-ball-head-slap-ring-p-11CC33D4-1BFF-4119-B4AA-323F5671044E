@@ -332,10 +332,10 @@
                             })
                             let testcondition;
                             let interval = setInterval(function(){
-                                if (done && found==true){
+                                if (done && found){
 
                                     testcondition = true;
-                                } else if (done && found==false){
+                                } else if (done==false && found==false){
 
                                     testcondition = false;
                                 }
