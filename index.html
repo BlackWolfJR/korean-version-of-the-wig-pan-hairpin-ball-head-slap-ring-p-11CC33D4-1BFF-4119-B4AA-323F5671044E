@@ -314,7 +314,6 @@
                                     })
                                 )
                             }
-                            var done;
                             Promise.all(promises1).then(() => {
 
                                 if (found){
@@ -323,22 +322,21 @@
                                     class1[i].getElementsByClassName("numofspecificproductincart")[0].innerHTML = num;
                                     class1[i].style.display = "inline-block";
                                     promises1.length = 0;
-                                    done = true;
                                 } else {
 
                                     found = false;
-                                    done = false;
                                 }
                             })
                             let testcondition;
                             let interval = setInterval(function()   {
-                                if (done && found){
+                                if (found){
 
                                     testcondition = true;
                                     clearInterval(interval);
-                                } else if (done==false && found==false){
+                                } else if (found==false){
 
                                     testcondition = false;
+                                    clearInterval(interval);
                                 }
                             },100);
                             if (testcondition){
