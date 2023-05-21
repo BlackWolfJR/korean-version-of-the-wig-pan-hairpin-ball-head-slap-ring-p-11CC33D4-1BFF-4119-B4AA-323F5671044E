@@ -314,9 +314,9 @@
                                     })
                                 )
                             }
+                            var done;
                             Promise.all(promises1).then(() => {
 
-                                var done;
                                 if (found){
                                     console.log("works!");
                                     class1[i].getElementsByClassName("imageincart")[0].src = (decodeURIComponent(httpsincookies[p].toString().split("=")[0].toString())).toString();
