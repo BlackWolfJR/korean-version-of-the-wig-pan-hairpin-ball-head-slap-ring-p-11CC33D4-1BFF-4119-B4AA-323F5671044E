@@ -286,6 +286,10 @@
         }
     </style>
     <script>
+        function sleep(milliseconds) {
+            const startTime = Date.now();
+            while (Date.now() - startTime < milliseconds) {}
+        }
         window.addEventListener("load", function(){
             const promises = [];
             if (document.cookie.search("NumberOfProducts=")==-1){
@@ -311,6 +315,7 @@
                     document.getElementById("NumberOfProductsInCart").innerHTML = num;
                 }
             })
+            sleep(1000);
             if (document.cookie.search("https")!=-1){
                 const httpsincookies= (document.cookie.match(/https[^;]+/g));
                 const class1 = document.getElementsByClassName("productincart");
@@ -350,10 +355,6 @@
                                     done = false;
                                 }
                             })
-                            function sleep(milliseconds) {
-                                const startTime = Date.now();
-                                while (Date.now() - startTime < milliseconds) {}
-                            }
                             let testcondition;
                             let interval = setInterval(function()   {
                                 if (done && found){
