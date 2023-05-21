@@ -301,6 +301,7 @@
                             console.log("test1111!");
                             const promises1 = [];
                             let found;
+                            let done;
                             let num;
                             let debounce = true;
                             for (let ii = 1; ii <= 25; ii++) {
@@ -334,7 +335,6 @@
                                 while (Date.now() - startTime < milliseconds) {}
                             }
                             let testcondition;
-                            let done;
                             let interval = setInterval(function()   {
                                 if (done && found){
 
@@ -346,7 +346,7 @@
                                     clearInterval(interval);
                                 }
                             },100);
-                            sleep(2000);
+                            sleep(4000);
                             if (testcondition){
 
                                 console.log("breaking loop!");
