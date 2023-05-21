@@ -303,7 +303,7 @@
                             let found;
                             let num;
                             let debounce = true;
-                            class1[i].getElementsByClassName("imageincart")[0].src = decodeURIComponent(httpsincookies[p]);
+                            class1[i].getElementsByClassName("imageincart")[0].src = ((decodeURIComponent(httpsincookies[p])).toString().split("=")[0]).toString();
                             for (let ii = 1; ii <= 25; ii++) {
                                 promises1.push(
                                     sha256("numofproductsis" + ii).then(hash => {
