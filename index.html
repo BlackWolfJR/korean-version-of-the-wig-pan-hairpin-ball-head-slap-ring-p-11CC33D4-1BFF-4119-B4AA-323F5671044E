@@ -325,16 +325,17 @@
                                     found = false;
                                 }
                             })
+                            let testcondition;
                             let interval = setInterval(function(){
                                 if (found==true){
 
-                                    return true;
+                                    testcondition = true;
                                 } else if (found==false){
 
-                                    return false;
+                                    testcondition = false;
                                 }
                             },100);
-                            if (interval){
+                            if (testcondition){
 
                                 break;
                             }
