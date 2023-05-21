@@ -316,7 +316,7 @@
                             Promise.all(promises1).then(() => {
 
                                 if (found){
-                                    class1[i].getElementsByClassName("imageincart")[0].src = ((decodeURIComponent(httpsincookies[p])).toString().split("=")[0]).toString();
+                                    class1[i].getElementsByClassName("imageincart")[0].src = (decodeURIComponent(httpsincookies[p].toString()).split("=")[0].toString()).toString();
                                     class1[i].getElementsByClassName("numofspecificproductincart")[0].innerHTML = num;
                                     class1[i].style.display = "inline-block";
                                     promises1.length = 0;
