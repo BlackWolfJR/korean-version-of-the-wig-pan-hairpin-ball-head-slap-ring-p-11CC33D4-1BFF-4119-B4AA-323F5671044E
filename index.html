@@ -445,12 +445,11 @@
                         for(let i=0;i<25;i++){
                             if (document.getElementsByClassName("imageincart")[i].src==""){
                                 document.getElementsByClassName("imageincart")[i].src = "https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png";
-                                var balls=i;
+                                document.getElementsByClassName("imageincart")[i].parentElement.getElementsByClassName("numofspecificproductincart")[0].innerHTML = "1";
+                                document.getElementsByClassName("imageincart")[i].parentElement.style.display = "inline-block";
                                 break;
                             }
                         }
-                        document.getElementsByClassName("imageincart")[balls].parentElement.getElementsByClassName("numofspecificproductincart")[0].innerHTML = "1";
-                        document.getElementsByClassName("imageincart")[balls].parentElement.style.display = "inline-block";
                         document.getElementById("NumberOfProductsInCart").innerHTML = "1";
                     })
                 });
