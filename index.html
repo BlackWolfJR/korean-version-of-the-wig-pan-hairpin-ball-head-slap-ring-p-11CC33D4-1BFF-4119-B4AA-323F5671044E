@@ -314,73 +314,72 @@
                 if (found==true){
                     document.getElementById("NumberOfProductsInCart").innerHTML = num;
                 }
-            })
-            sleep(5000);
-            if (document.cookie.search("https")!=-1){
-                const httpsincookies= (document.cookie.match(/https[^;]+/g));
-                const class1 = document.getElementsByClassName("productincart");
-                for (let p=0;p<httpsincookies.length;p++){
+                if (document.cookie.search("https")!=-1){
+                    const httpsincookies= (document.cookie.match(/https[^;]+/g));
+                    const class1 = document.getElementsByClassName("productincart");
+                    for (let p=0;p<httpsincookies.length;p++){
 
-                    for (let i=0;i<class1.length;i++){
-                        if (class1[i].getElementsByClassName("imageincart")[0].src==window.location.href){
-                            console.log("test1111!");
-                            const promises1 = [];
-                            let found;
-                            let done;
-                            let num;
-                            let debounce = true;
-                            for (let ii = 1; ii <= 25; ii++) {
-                                promises1.push(
-                                    sha256("numofproductsis" + ii).then(hash => {
-                                        if (hash.toString()==(httpsincookies[p].toString()).split("=")[1].toString()) {
-                                            found = true;
-                                            num = ii;
-                                            console.log("test!");
-                                        }
-                                    })
-                                )
-                            }
-                            Promise.all(promises1).then(() => {
-
-                                if (found){
-                                    console.log("works!");
-                                    class1[i].getElementsByClassName("imageincart")[0].src = (decodeURIComponent(httpsincookies[p].toString().split("=")[0].toString())).toString();
-                                    class1[i].getElementsByClassName("numofspecificproductincart")[0].innerHTML = num;
-                                    class1[i].style.display = "inline-block";
-                                    promises1.length = 0;
-                                    done = true;
-                                } else {
-
-                                    found = false;
-                                    done = false;
+                        for (let i=0;i<class1.length;i++){
+                            if (class1[i].getElementsByClassName("imageincart")[0].src==window.location.href){
+                                console.log("test1111!");
+                                const promises1 = [];
+                                let found;
+                                let done;
+                                let num;
+                                let debounce = true;
+                                for (let ii = 1; ii <= 25; ii++) {
+                                    promises1.push(
+                                        sha256("numofproductsis" + ii).then(hash => {
+                                            if (hash.toString()==(httpsincookies[p].toString()).split("=")[1].toString()) {
+                                                found = true;
+                                                num = ii;
+                                                console.log("test!");
+                                            }
+                                        })
+                                    )
                                 }
-                            })
-                            let testcondition;
-                            let interval = setInterval(function()   {
-                                if (done && found){
+                                Promise.all(promises1).then(() => {
 
-                                    testcondition = true;
-                                    clearInterval(interval);
-                                } else if (done==false && found==false){
+                                    if (found){
+                                        console.log("works!");
+                                        class1[i].getElementsByClassName("imageincart")[0].src = (decodeURIComponent(httpsincookies[p].toString().split("=")[0].toString())).toString();
+                                        class1[i].getElementsByClassName("numofspecificproductincart")[0].innerHTML = num;
+                                        class1[i].style.display = "inline-block";
+                                        promises1.length = 0;
+                                        done = true;
+                                    } else {
 
-                                    testcondition = false;
-                                    clearInterval(interval);
+                                        found = false;
+                                        done = false;
+                                    }
+                                })
+                                let testcondition;
+                                let interval = setInterval(function()   {
+                                    if (done && found){
+
+                                        testcondition = true;
+                                        clearInterval(interval);
+                                    } else if (done==false && found==false){
+
+                                        testcondition = false;
+                                        clearInterval(interval);
+                                    }
+                                },100);
+                                sleep(1000);
+                                if (testcondition){
+
+                                    console.log("breaking loop!");
+                                    break;
                                 }
-                            },100);
-                            sleep(1000);
-                            if (testcondition){
-
-                                console.log("breaking loop!");
-                                break;
+                                console.log("not breaking loop!");
+                                
                             }
-                            console.log("not breaking loop!");
-                            
+
                         }
 
                     }
-
                 }
-            }
+            })
         })
         function sha256(input) { //// hash func
                 const encoder = new TextEncoder();  
