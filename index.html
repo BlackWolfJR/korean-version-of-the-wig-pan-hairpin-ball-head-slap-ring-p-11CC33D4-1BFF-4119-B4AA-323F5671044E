@@ -331,10 +331,11 @@
                                 }
                             })
                             let testcondition;
-                            let interval = setInterval(function(){
+                            let interval = setInterval(function()   {
                                 if (done && found){
 
                                     testcondition = true;
+                                    clearInterval(interval);
                                 } else if (done==false && found==false){
 
                                     testcondition = false;
