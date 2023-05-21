@@ -316,17 +316,18 @@
                             }
                             Promise.all(promises1).then(() => {
 
+                                var done;
                                 if (found){
                                     console.log("works!");
                                     class1[i].getElementsByClassName("imageincart")[0].src = (decodeURIComponent(httpsincookies[p].toString().split("=")[0].toString())).toString();
                                     class1[i].getElementsByClassName("numofspecificproductincart")[0].innerHTML = num;
                                     class1[i].style.display = "inline-block";
                                     promises1.length = 0;
-                                    var done = true;
+                                    done = true;
                                 } else {
 
                                     found = false;
-                                    var done = false;
+                                    done = false;
                                 }
                             })
                             let testcondition;
