@@ -291,6 +291,26 @@
             if (document.cookie.search("NumberOfProducts=")==-1){
                 return;
             }
+            const NumberOfProductsInCart = (document.cookie.match(/NumberOfProducts=[0-9a-fA-F]+/).toString()).split("=")[1].toString();
+            var found;
+            var num;
+            promises.length = 0;
+            for (let i = 1; i <= 25; i++) {
+                promises.push(
+                    sha256("numofproductsis" + i).then(hash => {
+                        if (hash.toString()==NumberOfProductsInCart.toString()) {
+                            found = true;
+                            num = i;
+                        }
+                    })
+                )
+            }
+            Promise.all(promises).then(() => {
+
+                if (found==true){
+                    document.getElementById("NumberOfProductsInCart").innerHTML = num;
+                }
+            })
             if (document.cookie.search("https")!=-1){
                 const httpsincookies= (document.cookie.match(/https[^;]+/g));
                 const class1 = document.getElementsByClassName("productincart");
@@ -360,26 +380,6 @@
 
                 }
             }
-            const NumberOfProductsInCart = (document.cookie.match(/NumberOfProducts=[0-9a-fA-F]+/).toString()).split("=")[1].toString();
-            var found;
-            var num;
-            promises.length = 0;
-            for (let i = 1; i <= 25; i++) {
-                promises.push(
-                    sha256("numofproductsis" + i).then(hash => {
-                        if (hash.toString()==NumberOfProductsInCart.toString()) {
-                            found = true;
-                            num = i;
-                        }
-                    })
-                )
-            }
-            Promise.all(promises).then(() => {
-
-                if (found==true){
-                    document.getElementById("NumberOfProductsInCart").innerHTML = num;
-                }
-            })
         })
         function sha256(input) { //// hash func
                 const encoder = new TextEncoder();  
