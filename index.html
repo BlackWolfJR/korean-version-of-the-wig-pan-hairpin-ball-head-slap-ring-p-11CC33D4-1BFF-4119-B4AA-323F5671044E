@@ -322,18 +322,21 @@
                                     class1[i].getElementsByClassName("numofspecificproductincart")[0].innerHTML = num;
                                     class1[i].style.display = "inline-block";
                                     promises1.length = 0;
+                                    done = true;
                                 } else {
 
                                     found = false;
+                                    done = false;
                                 }
                             })
                             let testcondition;
+                            let done;
                             let interval = setInterval(function()   {
-                                if (found){
+                                if (done && found){
 
                                     testcondition = true;
                                     clearInterval(interval);
-                                } else if (found==false){
+                                } else if (done==false && found==false){
 
                                     testcondition = false;
                                     clearInterval(interval);
