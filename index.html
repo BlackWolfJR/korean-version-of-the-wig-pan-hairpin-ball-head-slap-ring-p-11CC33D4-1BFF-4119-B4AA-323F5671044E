@@ -299,10 +299,11 @@
                 const httpsincookies= (document.cookie.match(/https[^;]+/g));
                 const class1 = document.getElementsByClassName("productincart");
                 for (let p=0;p<httpsincookies.length;p++){
+                    let found;
                     for (let i=0;i<class1.length;i++){
-                        var found;
                         console.log(found);
                         if (found){
+                            found = undefined;
                             break;
                         }
                         if (class1[i].getElementsByClassName("imageincart")[0].src==window.location.href){
