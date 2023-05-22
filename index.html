@@ -300,41 +300,24 @@
                 const class1 = document.getElementsByClassName("productincart");
                 for (let p=0;p<httpsincookies.length;p++){
                     for (let i=0;i<class1.length;i++){
+                        let found;
+                        if (found){
+                            break;
+                        }
                         if (class1[i].getElementsByClassName("imageincart")[0].src==window.location.href){
                             const promises1 = [];
-                            let found;
-                            let num;
-                            let debounce = true;
                             for (let ii = 1; ii <= 25; ii++) {
                                 promises1.push(
                                     sha256("numofproductsis" + ii).then(hash => {
                                         if (hash.toString()==(httpsincookies[p].toString()).split("=")[1].toString()) {
+                                            class1[i].getElementsByClassName("imageincart")[0].src = (decodeURIComponent(httpsincookies[p].toString().split("=")[0].toString())).toString();
+                                            class1[i].getElementsByClassName("numofspecificproductincart")[0].innerHTML = ii;
+                                            class1[i].style.display = "inline-block";
                                             found = true;
-                                            num = ii;
                                         }
                                     })
                                 )
                             }
-                            async function yield(){
-                                await (Promise.all(promises1).then(() => {
-                                    if (found){
-                                        class1[i].getElementsByClassName("imageincart")[0].src = (decodeURIComponent(httpsincookies[p].toString().split("=")[0].toString())).toString();
-                                        class1[i].getElementsByClassName("numofspecificproductincart")[0].innerHTML = num;
-                                        class1[i].style.display = "inline-block";
-                                    } else {
-
-                                        found = false;
-                                    }
-                                    promises1.length = 0;
-                                }));
-                            }
-                            yield();
-                            if (found){
-
-                                console.log("breaking loop!");
-                                break;
-                            }
-                            console.log("not breaking loop!");
                             
                         }
 
