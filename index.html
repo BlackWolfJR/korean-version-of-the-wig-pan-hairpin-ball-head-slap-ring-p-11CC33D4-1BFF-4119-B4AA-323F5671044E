@@ -298,27 +298,32 @@
             if (document.cookie.search("https")!=-1){
                 const httpsincookies= (document.cookie.match(/https[^;]+/g));
                 const class1 = document.getElementsByClassName("productincart");
+                let found;
+                async function a(){
                 for (let p=0;p<httpsincookies.length;p++){
                     for (let i=0;i<class1.length;i++){
                         if (class1[i].getElementsByClassName("imageincart")[0].src==window.location.href){
-                            if (found==undefined){
                             for (let ii = 1; ii <= 25; ii++) {
-                                sha256("numofproductsis" + ii).then(hash => {
+                                await sha256("numofproductsis" + ii).then(hash => {
                                     if (hash.toString()==(httpsincookies[p].toString()).split("=")[1].toString()) {
                                         class1[i].getElementsByClassName("imageincart")[0].src = (decodeURIComponent(httpsincookies[p].toString().split("=")[0].toString())).toString();
                                         class1[i].getElementsByClassName("numofspecificproductincart")[0].innerHTML = ii;
                                         class1[i].style.display = "inline-block";
-                                        var found = true;
+                                        found = true;
                                     }
                                 })
-                            }
-                            } else if (found){found = undefined};
-                            
+                                if (found){
+                                    break;
+                                }
+
+                            } 
                         }
 
                     }
 
                 }
+                }
+                a();
             }
             const NumberOfProductsInCart = (document.cookie.match(/NumberOfProducts=[0-9a-fA-F]+/).toString()).split("=")[1].toString();
             var found;
