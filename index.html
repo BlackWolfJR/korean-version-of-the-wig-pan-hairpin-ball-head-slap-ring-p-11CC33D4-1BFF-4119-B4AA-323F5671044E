@@ -298,8 +298,8 @@
             if (document.cookie.search("https")!=-1){
                 const httpsincookies= (document.cookie.match(/https[^;]+/g));
                 const class1 = document.getElementsByClassName("productincart");
+                let found;
                 for (let p=0;p<httpsincookies.length;p++){
-                    let found;
                     for (let i=0;i<class1.length;i++){
                         console.log(found);
                         if (found){
