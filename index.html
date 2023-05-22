@@ -298,16 +298,12 @@
             if (document.cookie.search("https")!=-1){
                 const httpsincookies= (document.cookie.match(/https[^;]+/g));
                 const class1 = document.getElementsByClassName("productincart");
-                let found;
+                let promiseresolved = Promise.resolve();
                 for (let p=0;p<httpsincookies.length;p++){
                     for (let i=0;i<class1.length;i++){
-                        console.log(found);
-                        if (found){
-                            found = undefined;
-                            break;
-                        }
                         if (class1[i].getElementsByClassName("imageincart")[0].src==window.location.href){
                             const promises1 = [];
+                            let found;
                             for (let ii = 1; ii <= 25; ii++) {
                                 promises1.push(
                                     sha256("numofproductsis" + ii).then(hash => {
@@ -319,6 +315,10 @@
                                         }
                                     })
                                 )
+                            }
+                            sleep(3000)
+                            if(found){
+                                break;
                             }
                             
                         }
