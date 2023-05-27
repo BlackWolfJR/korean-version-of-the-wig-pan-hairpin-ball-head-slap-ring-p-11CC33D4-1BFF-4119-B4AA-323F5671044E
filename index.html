@@ -445,7 +445,6 @@
                         promises.length = 0;
                         promises.push(
                             sha256("numofproductsis1").then(hash => {
-                                const promises = [];
                                 var cookieValue2;
                                 promises.push(sha256("numofproductsis1").then(hash1 => {
                                     cookieValue2 = `${encodeURIComponent("https://raw.githubusercontent.com/BlackWolfJR/2/main/1.jpg")}=${hash1}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
