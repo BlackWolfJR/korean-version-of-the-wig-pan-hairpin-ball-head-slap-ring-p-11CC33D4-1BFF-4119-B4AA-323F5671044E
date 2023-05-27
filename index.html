@@ -296,7 +296,6 @@
                 const class1 = document.getElementsByClassName("productincart");
                 let found;
                 async function runcheck(){
-                    console.log(httpsincookies.length);
                     for (let p=0;p<httpsincookies.length;p++){
                         for (let i=0;i<class1.length;i++){
                             if (class1[i].getElementsByClassName("imageincart")[0].src==window.location.href){
@@ -310,10 +309,12 @@
                                         }
                                     })
                                     if (found){
+                                        found = undefined;
                                         break;
                                     }
                                 } 
                                 if (found){
+                                    found = undefined;
                                     break;
                                 }
                             }
