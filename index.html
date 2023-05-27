@@ -419,6 +419,7 @@
                         sha256("numofproductsis" + i).then(hash => {
                             if (hash.toString() === NumberOfProductsInCart.toString()) {
                                 num = i;
+                                found = true;
                             }
                         })
                 );
