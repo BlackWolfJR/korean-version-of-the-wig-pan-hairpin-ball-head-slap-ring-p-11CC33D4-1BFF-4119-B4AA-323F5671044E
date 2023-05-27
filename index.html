@@ -407,7 +407,7 @@
             if (document.cookie.search("NumberOfProducts=")==-1 && document.cookie.search(encodeURIComponent("https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png"))!=-1){
                 return;
             }
-            if (document.cookie.search("NumberOfProducts=")!=-1 && document.cookie.search(encodeURIComponent("https://raw.githubusercontent.com/BlackWolfJR/1/main/1.jpg"))==-1){   
+            if (document.cookie.search("NumberOfProducts=")!=-1 && document.cookie.search(encodeURIComponent("https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png"))==-1){   
 
                 const NumberOfProductsInCart = (document.cookie.match(/NumberOfProducts=[0-9a-fA-F]+/).toString()).split("=")[1].toString();
                 let NumberOfProductsInCart1 = document.getElementById("NumberOfProductsInCart");
@@ -454,7 +454,7 @@
                                     document.cookie = cookieValue2;
                                     for(let i=0;i<25;i++){
                                         if (document.getElementsByClassName("imageincart")[i].src==window.location.href){
-                                            document.getElementsByClassName("imageincart")[i].src = "https://raw.githubusercontent.com/BlackWolfJR/1/main/1.jpg";
+                                            document.getElementsByClassName("imageincart")[i].src = "https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png";
                                             document.getElementsByClassName("imageincart")[i].parentElement.getElementsByClassName("numofspecificproductincart")[0].innerHTML = "1";
                                             document.getElementsByClassName("imageincart")[i].parentElement.style.display = "inline-block";
                                             break;
