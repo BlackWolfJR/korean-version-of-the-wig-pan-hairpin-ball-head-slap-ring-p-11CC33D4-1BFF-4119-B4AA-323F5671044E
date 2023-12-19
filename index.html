@@ -172,11 +172,11 @@
             
             display: block;
             line-height: 1.875rem;
-            font-size: 22px;
+            font-size: 21px;
             color:rgb(1,0,26);
             letter-spacing: 0.2px;
             font-weight: 550;
-            font-family: sans-serif;
+            font-family: 'Inter', sans-serif;
             max-height:230px;
             overflow-y: hidden;
         }
@@ -234,6 +234,23 @@
             text-shadow: 0 0 10px white;
             box-shadow: 0 0 15px rgb(1, 0, 26);
         }
+        #checkout:hover{
+
+            color: white;
+            text-shadow: 0 0 10px white;
+            box-shadow: 0 0 15px rgb(1, 0, 26);
+        }
+        #cartscrollbar::-webkit-scrollbar {
+            width: 5px;
+            height:0;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 1px black;
+        }
+        #cartscrollbar::-webkit-scrollbar-thumb {
+            background-color: rgb(1,0,26);
+            border-radius: 10px;
+        }
         #container{
 
             position: absolute;
@@ -287,6 +304,10 @@
     </style>
     <script>
         window.addEventListener("load", function(){
+            const UrlParams = new URLSearchParams(window.location.search)
+            const UrlParams1 = UrlParams.get("pid")
+            console.log("pid is " + UrlParams1)
+            fetch("https://developers.cjdropshipping.com/api2.0/v1/product/query?pid=1590999643087974400", {method:"GET", headers:{"CJ-Access-Token": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4NTQ3IiwidHlwZSI6IkFDQ0VTU19UT0tFTiIsInN1YiI6ImJxTG9icVEwbG1ObnlRcHhQV0xaeW1uanZYSGVjdlhOVEtNRzllelNROUQxUVR2d3ZkQzJ5bzlHU3U0WHJkMnM3WlBQQnpjVFhYWERnM3I4d2phbG81WVl2bGsvdWRPT3dnaUVIei95YkkxdThVNThOTDh1dEJoRlJ3bmIzWmpGU042RDJvaUVoRlpLMGVWYlRraVBCOWx6dC8vS2lGZ1BiZzlydWNNd1JoM3p2aFdSYzBSbitjK2dNSHFwWURJbDZoSVFnM3dRc2xrUzhXa1loRFgvbDlkRjZNWks4NEQxblU2eVlDejFrOFFMRDRtWm1pZ1d4cDlmRFpkbWsxRSs5a1l4TlVlbTFCZ2czZ3VoVklBdWVwVkVucXVDS2JaM1hlMDlHWmhlajRRPSJ9.yTFITJbt4QutPFuMxA7i9xzcczZdzVtCB720SH-Yc6Q"}}).then(response=>response.json()).then(data=>{if (data.data.listedNum>0){document.getElementById("InStock").style.color = "green"; document.getElementById("InStock").innerHTML = "In Stock"}else {document.getElementById("InStock").style.color = "red"; document.getElementById("InStock").innerHTML = "Out of Stock"}})
             const promises = [];
             if (document.cookie.search("NumberOfProducts=")==-1){
                 return;
@@ -605,8 +626,9 @@
         <a id="SignIn" href="https://blackwolfjr.github.io/SignIn/">Sign In</a>
         <button onclick="CartClick()" id="Cart"><img src="https://raw.githubusercontent.com/BlackWolfJR/1/main/cart.png" style="width: 64px;height: 64px;"></img><div id="NumberOfProductsInCart">0</div></button>
     </div>
-    <div id="CartFrame" style="display: none;box-shadow: 0 0 15px rgb(1, 0, 26);position: fixed;background-color: white;right:0px;height: 100vh;width:275px;border-radius:10px;border:2px solid rgb(1, 0, 26);z-index: 1;margin-top:93px;"><div style="justify-content: center;background-color: rgb(1,0,26);padding-top: 25px;box-shadow: 0 0 2px rgb(1, 0, 26);width: 100%;text-align: center;text-shadow: 0 0 5px black;">
-        <span style="position: relative;bottom: 12px;font-size: 25px;display: block;font-family:Bold;color:white;text-shadow: 0 0 5px black;">My Cart</span></div>
+    <div id="CartFrame" style="display: none;height:510px;box-shadow: 0 0 15px rgb(1, 0, 26);position: fixed;background-color: white;right:0px;width:275px;border-radius:10px;border:2px solid rgb(1, 0, 26);z-index: 1;margin-top:93px;"><div style="justify-content: center;background-color: rgb(1,0,26);padding-top: 25px;box-shadow: 0 0 2px rgb(1, 0, 26);width: 100%;text-align: center;text-shadow: 0 0 5px black;">
+        <span style="position: relative;bottom: 12px;font-size: 21px;display: block;font-family:Bold;color:white;text-shadow: 0 0 5px black;font-family: 'Inter', sans-serif;">My Cart</span></div>
+        <div id="cartscrollbar" style="overflow-y: scroll;height: 395px;position: absolute;width: 100%;">
         <div class="productincart" style="display:none;margin:5px;box-shadow: 0 0 2px rgb(1, 0, 26);width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
         <div class="productincart" style="display:none;margin:5px;box-shadow: 0 0 2px rgb(1, 0, 26);width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
         <div class="productincart" style="display:none;margin:5px;box-shadow: 0 0 2px rgb(1, 0, 26);width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
@@ -632,6 +654,8 @@
         <div class="productincart" style="display:none;margin:5px;box-shadow: 0 0 2px rgb(1, 0, 26);width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
         <div class="productincart" style="display:none;margin:5px;box-shadow: 0 0 2px rgb(1, 0, 26);width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
         <div class="productincart" style="display:none;margin:5px;box-shadow: 0 0 2px rgb(1, 0, 26);width:95%;height:65px;"><img class="imageincart" src="" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img><span class="numofspecificproductincart" style="font-size: 32px;position: absolute;margin:14px 50px;box-shadow:0 0 1px black;">1</span><span style="font-size: 32px;position: absolute;margin:14px 100px;box-shadow:0 0 1px black;">+</span><span style="font-size: 32px;position: absolute;margin:10px 150px;box-shadow:0 0 1px black;">-</span></div>
+        </div>
+        <div style="display: flex;width: 100%;justify-content: center;margin-top: 410px;opacity: 35%;"><button id="checkout" style="width: 85%;height: 32px;color: white;background-color: rgb(1, 0, 26);border-radius: 8px;text-shadow: 0 0 5px black;transition:0.4s;font-family: 'Poppins', 'Inter', sans-serif;font-size: 16px;">Proceed to Checkout</button></div>
     </div>
     <hr style="box-shadow:0 0 1px black;border:1px solid rgb(1,0,26);margin:115px 20px;height: 0;width: 97%;position: absolute;">
     <div id="container">
@@ -648,14 +672,14 @@
         <img id="product" style="width:452px;height:435px;" src="https://raw.githubusercontent.com/BlackWolfJR/1/main/big.png"></img>
         <div id="productinfo">
             <span id="productname">Electric Automatic Nail Clipper with Light & 2 Speeds,Fingernail Cutter and File 2 in 1 Design, Nail Scraps Storage,USB Rechargeable Safety Fingernail Trimmer for Baby, Kids, Seniors and Adult</span>
-            <hr><span id="InStock" style="color:green;font-size: 26px;">In Stock</span></hr>
+            <hr><span id="InStock" style="color:green;font-size: 22px;font-family: 'Poppins', 'Inter', sans-serif;">In Stock</span></hr>
             <span style="margin-left: 20px" class="fa fa-star checked"></span>
             <span class="fa fa-star checked"></span>
             <span class="fa fa-star checked"></span>
             <span class="fa fa-star"></span>
             <span class="fa fa-star"></span>
-            <p style="display: inline;margin-left: 5px;font-size: 20px;color:rgb(1,0,26)">3.1</p>
-            <p style="display: inline;margin-left: 30px;font-size: 20px;color:rgb(1,0,26)">124 Ratings</p>
+            <p style="display: inline;margin-left: 5px;font-size: 20px;color:rgb(1,0,26);font-family: 'Poppins', 'Inter', sans-serif;font-size: 17px;">3.1</p>
+            <p style="display: inline;margin-left: 30px;font-size: 20px;color:rgb(1,0,26);font-family: 'Poppins', 'Inter', sans-serif;font-size: 17px;">124 Ratings</p>
             <span id="price">$39.99</span>
             <img src="https://raw.githubusercontent.com/BlackWolfJR/1/main/paypalimage.png">
             <button onclick="AddToCart()" id="AddToCart">Add To Cart</button>
@@ -664,39 +688,39 @@
                 <input type="hidden" name="hosted_button_id" value="T5X7V358F7CEL">
                 <button id="Buy">Buy Now</button>
             </form> 
-            <p style="margin:10px 0;font-size: 16px;color:rgb(6, 0, 190);">No Import Fees Deposit & Deliveries may take a few days</p>
+            <p style="margin:10px 0;font-size: 15px;color:rgb(6, 0, 190);font-family: 'Poppins', 'Inter', sans-serif;">No Import Fees Deposit & Deliveries may take a few days</p>
         </div>
     </div>
     <div id="u2">
-        <h1 style="margin:-5px 0;text-align:center;font-size: 22px;color:rgb(1,0,26);font-size: 22px;color:rgb(1,0,26);font-family: sans-serif;">About this Product</h1>
+        <h1 style="margin:-5px 0;text-align:center;font-size: 22px;color:rgb(1,0,26);font-size: 20px;color:rgb(1,0,26);font-family: 'Inter', sans-serif;">About this Product</h1>
         <hr style="margin:10px 0;"></hr>
         <ul>
-            <li style="font-size: 18px;">[High Safety and Ergonomic Design] the blade is hidden behind a curved groove and the recessed cutter allows for perfect nail separation while ensuring safety , especially for babies and people with eye problems.[High Safety and Ergonomic Design] the blade is hidden behind a curved groove and the recessed cutter allows for perfect nail separation while ensuring safety , especially for babies and people with eye problems.</li>
-            <li style="margin-top:8px;font-size: 18px;">[LED auxiliary Lighting and Quiet Working] nail cutter design adds auxiliary lighting, high speed and silent motor designed specifically for nighttime nail cutting. This nail clipper is certainly an ideal gift for the elderly, children and many people with poor eyesight.</li>
-            <li style="margin-top:8px;font-size: 18px;">[2-Speed Models and Rechargeable Portable Design] Just one button, short press to switch the speed. High and low dual speed design is suitable for the elderly and children.with 600mAH high capacity battery, using Type-C cable (included in the package) only takes 2~3 hours to fill. It is convenient to take it on a trip or business trip.</li>
-            <li style="margin-top:8px;font-size: 18px;">[Nail Debris Storage and Easy Cleaning]Nail clippings from nail clipping are collected in the product's storage box. By pressing the upper part of the window, you can easily open and dump the nail clippings for quick and easy cleaning.</li>
-            <li style="margin-top:8px;font-size: 18px;">[What You Get] Package includes 1 x electric nail clipper, 1 x cleaning brush, 1 x C-type charging cable, 1 x instruction manual. Please feel free to contact us if you have any problems about the product.</li>
+            <li style="font-size: 15px;font-family: 'Poppins', 'Inter', sans-serif;color:rgb(1, 0, 26);">[High Safety and Ergonomic Design] the blade is hidden behind a curved groove and the recessed cutter allows for perfect nail separation while ensuring safety , especially for babies and people with eye problems.[High Safety and Ergonomic Design] the blade is hidden behind a curved groove and the recessed cutter allows for perfect nail separation while ensuring safety , especially for babies and people with eye problems.</li>
+            <li style="font-size: 15px;font-family: 'Poppins', 'Inter', sans-serif;color:rgb(1, 0, 26);">[LED auxiliary Lighting and Quiet Working] nail cutter design adds auxiliary lighting, high speed and silent motor designed specifically for nighttime nail cutting. This nail clipper is certainly an ideal gift for the elderly, children and many people with poor eyesight.</li>
+            <li style="font-size: 15px;font-family: 'Poppins', 'Inter', sans-serif;color:rgb(1, 0, 26);">[2-Speed Models and Rechargeable Portable Design] Just one button, short press to switch the speed. High and low dual speed design is suitable for the elderly and children.with 600mAH high capacity battery, using Type-C cable (included in the package) only takes 2~3 hours to fill. It is convenient to take it on a trip or business trip.</li>
+            <li style="font-size: 15px;font-family: 'Poppins', 'Inter', sans-serif;color:rgb(1, 0, 26);">[Nail Debris Storage and Easy Cleaning]Nail clippings from nail clipping are collected in the product's storage box. By pressing the upper part of the window, you can easily open and dump the nail clippings for quick and easy cleaning.</li>
+            <li style="font-size: 15px;font-family: 'Poppins', 'Inter', sans-serif;color:rgb(1, 0, 26);">[What You Get] Package includes 1 x electric nail clipper, 1 x cleaning brush, 1 x C-type charging cable, 1 x instruction manual. Please feel free to contact us if you have any problems about the product.</li>
         </ul>
         <div style="width:100%;border: 1px solid blue;">
             <div style="display:inline-block;width:300px;border: 1px solid red;">
                 <img src="moto mais rapido.jpg" style="width:300px;height:300px;box-shadow:0 0 1px black;"></img>
-                <h3>Faster Motor</h3>
-                <p style="text-align: center;">The motor of this electric nail clipper is an upgraded version, the use of the process is very smooth without stagnation, trimming nails more efficient (trimming nails can be completed in about 5-10 minutes, of course, depending on how short you want to trim)
+                <h3 style="font-family: 'Inter', sans-serif;font-size: 16px;color:rgb(1, 0, 26);">Faster Motor</h3>
+                <p style="text-align: center;font-size: 14px;font-family: 'Poppins', 'Inter', sans-serif;color:rgb(1, 0, 26);">The motor of this electric nail clipper is an upgraded version, the use of the process is very smooth without stagnation, trimming nails more efficient (trimming nails can be completed in about 5-10 minutes, of course, depending on how short you want to trim)
 
                     *The motor works by creating a suction force to prevent nail splashes.</p>
             </div>
             <div style="display:inline-block;width:300px;margin-left: 25px;border: 1px solid red;">
                 <img src="Convenient Type-C Charging.jpg" style="width:300px;height:300px;box-shadow:0 0 1px black;"></img>
-                <h3>Convenient Type-C Charging</h3>
-                <p style="text-align: center;">Featured with the design of the Type-C interface for charging, on the one hand can make the nail clipper have a longer battery life, on the other hand makes charging more convenient, Consequently you can carry around and use it, as long as you have any Type-C interface charging source (such as a rechargeable battery) to charge it.</p>
+                <h3 style="font-family: 'Inter', sans-serif;font-size: 16px;color:rgb(1, 0, 26);">Convenient Type-C Charging</h3>
+                <p style="text-align: center;font-size: 14px;font-family: 'Poppins', 'Inter', sans-serif;color:rgb(1, 0, 26);">Featured with the design of the Type-C interface for charging, on the one hand can make the nail clipper have a longer battery life, on the other hand makes charging more convenient, Consequently you can carry around and use it, as long as you have any Type-C interface charging source (such as a rechargeable battery) to charge it.</p>
             </div>
             <div style="display:inline-block;width:300px;margin-left: 25px;border: 1px solid red;">
                 <img src="Great Nail Scraps Storage.jpg" style="width:300px;height:300px;box-shadow:0 0 1px black;"></img>
-                <h3>Great Nail Scraps Storage</h3>
-                <p style="text-align: center;">Ail shavings generated when cutting nails will be collected in the storage box of the product for easy cleaning, which means you never need to throw the ail shavings on time just like when you use the traditional nail clipper.</p>
+                <h3 style="font-family: 'Inter', sans-serif;font-size: 16px;color:rgb(1, 0, 26);">Great Nail Scraps Storage</h3>
+                <p style="text-align: center;font-size: 14px;font-family: 'Poppins', 'Inter', sans-serif;color:rgb(1, 0, 26);">Ail shavings generated when cutting nails will be collected in the storage box of the product for easy cleaning, which means you never need to throw the ail shavings on time just like when you use the traditional nail clipper.</p>
             </div>
         </div>
-        <h1 style="text-align:center;font-size: 22px;color:rgb(1,0,26);font-size: 22px;color:rgb(1,0,26);font-family: sans-serif;">Specifications</h1>
+        <h1 style="text-align:center;font-size: 22px;color:rgb(1,0,26);font-size: 22px;color:rgb(1,0,26);font-size: 15px;font-family: 'Inter', sans-serif;color:rgb(1, 0, 26);">Specifications</h1>
         <hr style="margin:-10px 0;"></hr>
         <div style="background-color: azure;position: absolute;width:50%;margin-top:20px;box-shadow: 0px 0 2px black;">
             <div style="display:flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
