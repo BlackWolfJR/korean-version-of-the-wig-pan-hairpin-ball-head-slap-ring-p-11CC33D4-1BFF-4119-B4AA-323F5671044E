@@ -304,305 +304,34 @@
     </style>
     <script>
         window.addEventListener("load", function(){
-            const UrlParams = new URLSearchParams(window.location.search)
-            const UrlParams1 = UrlParams.get("pid")
-            console.log("pid is " + UrlParams1)
-            fetch("https://developers.cjdropshipping.com/api2.0/v1/product/query?pid=1590999643087974400", {method:"GET", headers:{"CJ-Access-Token": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4NTQ3IiwidHlwZSI6IkFDQ0VTU19UT0tFTiIsInN1YiI6ImJxTG9icVEwbG1ObnlRcHhQV0xaeW1uanZYSGVjdlhOVEtNRzllelNROUQxUVR2d3ZkQzJ5bzlHU3U0WHJkMnM3WlBQQnpjVFhYWERnM3I4d2phbG81WVl2bGsvdWRPT3dnaUVIei95YkkxdThVNThOTDh1dEJoRlJ3bmIzWmpGU042RDJvaUVoRlpLMGVWYlRraVBCOWx6dC8vS2lGZ1BiZzlydWNNd1JoM3p2aFdSYzBSbitjK2dNSHFwWURJbDZoSVFnM3dRc2xrUzhXa1loRFgvbDlkRjZNWks4NEQxblU2eVlDejFrOFFMRDRtWm1pZ1d4cDlmRFpkbWsxRSs5a1l4TlVlbTFCZ2czZ3VoVklBdWVwVkVucXVDS2JaM1hlMDlHWmhlajRRPSJ9.yTFITJbt4QutPFuMxA7i9xzcczZdzVtCB720SH-Yc6Q"}}).then(response=>response.json()).then(data=>{if (data.data.listedNum>0){document.getElementById("InStock").style.color = "green"; document.getElementById("InStock").innerHTML = "In Stock"}else {document.getElementById("InStock").style.color = "red"; document.getElementById("InStock").innerHTML = "Out of Stock"}})
-            const promises = [];
-            if (document.cookie.search("NumberOfProducts=")==-1){
-                return;
-            }
-            if (document.cookie.search("https")!=-1){
-                const httpsincookies= (document.cookie.match(/https[^;]+/g));
-                const class1 = document.getElementsByClassName("productincart");
-                let found;
-                async function runcheck(){
-                    for (let p=0;p<httpsincookies.length;p++){
-                        for (let i=0;i<class1.length;i++){
-                            if (class1[i].getElementsByClassName("imageincart")[0].src==window.location.href){
-                                for (let ii = 1; ii <= 25; ii++) {
-                                    await sha256("numofproductsis" + ii).then(hash => {
-                                        if (hash.toString()==(httpsincookies[p].toString()).split("=")[1].toString()) {
-                                            class1[i].getElementsByClassName("imageincart")[0].src = (decodeURIComponent(httpsincookies[p].toString().split("=")[0].toString())).toString();
-                                            class1[i].getElementsByClassName("numofspecificproductincart")[0].innerHTML = ii;
-                                            class1[i].style.display = "inline-block";
-                                            found = true;
-                                        }
-                                    })
-                                    if (found){
-                                        break;
-                                    }
-                                } 
-                                if (found){
-                                    found = undefined;
-                                    break;
-                                }
-                            }
-
+            const productid = window.location.href.split("-p-")[1].replace("/", "")
+            fetch("https://backend-6eeb.onrender.com/", {headers: {"Content-Type": "application/json"}, method:"POST", body: JSON.stringify({"Action": "Get Product Details", "PID":productid})}).then(response=>response.json()).then(
+                data=>{
+                    if (data.data==undefined){return}
+                    document.getElementById("desc").innerHTML = data.data.description;
+                    document.getElementById("price").innerHTML = "$"+data.data.sellPrice+"0";
+                    console.log(data.data.productNameEn);
+                    document.getElementById("productname").innerHTML = data.data.productNameEn;
+                    document.getElementById("product").src = data.data.productImageSet[0];
+                    for (let i = 0;i<data.data.productImageSet.length;i++){
+                        document.getElementById("img"+i).style.display = "block";
+                        document.getElementById("img"+i).src = data.data.productImageSet[i]
+                        document.getElementById("img"+i).onmouseover = function(){
+                            let imageproduct = document.getElementById("product");
+                            imageproduct.style="width:452px;height:435px;";
+                            imageproduct.src = data.data.productImageSet[i];
                         }
-
+                    };
+                    if (data.data.listedNum>0){
+                        document.getElementById("InStock").style.color = "green";
+                        document.getElementById("InStock").innerHTML = "In Stock"
+                    }else {
+                        document.getElementById("InStock").style.color = "red";
+                        document.getElementById("InStock").innerHTML = "Out of Stock"
                     }
                 }
-                runcheck();
-            }
-            const NumberOfProductsInCart = (document.cookie.match(/NumberOfProducts=[0-9a-fA-F]+/).toString()).split("=")[1].toString();
-            var found;
-            var num;
-            promises.length = 0;
-            for (let i = 1; i <= 25; i++) {
-                promises.push(
-                    sha256("numofproductsis" + i).then(hash => {
-                        if (hash.toString()==NumberOfProductsInCart.toString()) {
-                            found = true;
-                            num = i;
-                        }
-                    })
-                )
-            }
-            Promise.all(promises).then(() => {
-
-                if (found==true){
-                    document.getElementById("NumberOfProductsInCart").innerHTML = num;
-                }
-            })
+            )
         })
-        function sha256(input) { //// hash func
-                const encoder = new TextEncoder();  
-                const data = encoder.encode(input);
-                return crypto.subtle.digest('SHA-256', data).then(buffer => {
-                    const hashArray = Array.from(new Uint8Array(buffer));
-                    const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
-                    return hashHex;
-                });
-        } ////
-        function changeimage1(){
-
-            let imageproduct = document.getElementById("product");
-            imageproduct.style="width:452px;height:435px;";
-            imageproduct.src = "big.png";
-        }
-        function changeimage2(){
-
-            let imageproduct = document.getElementById("product");
-            imageproduct.style="width:452px;height:435px;";
-            imageproduct.src = "2.jpg";
-        }
-        function changeimage3(){
-
-            let imageproduct = document.getElementById("product");
-            imageproduct.style="width:452px;height:435px;";
-            imageproduct.src = "3.jpg";
-        }
-        function changeimage4(){
-
-            let imageproduct = document.getElementById("product");
-            imageproduct.style="width:452px;height:435px;";
-            imageproduct.src = "4.jpg";
-        }
-        function changeimage5(){
-
-            let imageproduct = document.getElementById("product");
-            imageproduct.style="width:452px;height:435px;";
-            imageproduct.src = "5.jpg";
-        }
-        function changeimage6(){
-
-            let imageproduct = document.getElementById("product");
-            imageproduct.style="width:452px;height:435px;";
-            imageproduct.src = "6.jpg";
-        }
-        function changeimage7(){
-
-            let imageproduct = document.getElementById("product");
-            imageproduct.style="width:452px;height:435px;";
-            imageproduct.src = "7.jpg";
-        }
-        function changeimage8(){
-
-            let imageproduct = document.getElementById("product");
-            imageproduct.style="width:452px;height:435px;";
-            imageproduct.src = "8.jpg";
-        }
-        function AddToCart(){
-
-            if (document.cookie.search("NumberOfProducts=")==-1 && document.cookie.search(encodeURIComponent("https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png"))!=-1){
-                return;
-            }
-            if (document.cookie.search("NumberOfProducts=")!=-1 && document.cookie.search(encodeURIComponent("https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png"))==-1){   
-
-                const NumberOfProductsInCart = (document.cookie.match(/NumberOfProducts=[0-9a-fA-F]+/).toString()).split("=")[1].toString();
-                let NumberOfProductsInCart1 = document.getElementById("NumberOfProductsInCart");
-                let found;
-                let num;
-                const promises = [];
-                for (let i = 1; i <= 25; i++) {
-                    promises.push(
-                        sha256("numofproductsis" + i).then(hash => {
-                            if (hash.toString() === NumberOfProductsInCart.toString()) {
-                                num = i;
-                                found = true;
-                            }
-                        })
-                );
-                }
-                Promise.all(promises).then(() => {
-                    if (!found) {
-                        return;
-                    }
-                    if (num>=9){
-
-                        NumberOfProductsInCart1.style="width: 21px;height: 21px;margin-top: 18px;right:37px;"
-                    }
-                    if (num>=25){
-
-                        alert("No more than 25 products!")
-                        return;
-                    }
-                    sha256("numofproductsis" + (num+1)).then(hash => {
-                        document.cookie = `NumberOfProducts=${hash};expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
-                    });
-                    Promise.all(promises).then(() => {
-
-                        promises.length = 0;
-                        promises.push(
-                            sha256("numofproductsis1").then(hash => {
-                                var cookieValue2;
-                                promises.push(sha256("numofproductsis1").then(hash1 => {
-                                    cookieValue2 = `${encodeURIComponent("https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png")}=${hash1}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
-                                }))
-                                Promise.all(promises).then(() => {
-
-                                    document.cookie = cookieValue2;
-                                    for(let i=0;i<25;i++){
-                                        if (document.getElementsByClassName("imageincart")[i].src==window.location.href){
-                                            document.getElementsByClassName("imageincart")[i].src = "https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png";
-                                            document.getElementsByClassName("imageincart")[i].parentElement.getElementsByClassName("numofspecificproductincart")[0].innerHTML = "1";
-                                            document.getElementsByClassName("imageincart")[i].parentElement.style.display = "inline-block";
-                                            break;
-                                        }
-                                    }
-                                    document.getElementById("NumberOfProductsInCart").innerHTML = "1";
-                                })
-                            })
-                        )   
-                    })
-                    NumberOfProductsInCart1.innerHTML = num+1;
-                });
-                ////
-                return;
-            }
-            if (document.cookie.search("NumberOfProducts=")==-1 && document.cookie.search(encodeURIComponent("https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png"))==-1){   
-
-                sha256("numofproductsis1").then(hash => {
-                    const promises = [];
-                    const cookieValue1 = `NumberOfProducts=${hash}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
-                    var cookieValue2;
-                    document.cookie = cookieValue1;
-                    promises.push(sha256("numofproductsis1").then(hash1 => {
-                        cookieValue2 = `${encodeURIComponent("https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png")}=${hash1}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
-                    }))
-                    Promise.all(promises).then(() => {
-
-                        document.cookie = cookieValue2;
-                        for(let i=0;i<25;i++){
-                            if (document.getElementsByClassName("imageincart")[i].src==window.location.href){
-                                document.getElementsByClassName("imageincart")[i].src = "https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png";
-                                document.getElementsByClassName("imageincart")[i].parentElement.getElementsByClassName("numofspecificproductincart")[0].innerHTML = "1";
-                                document.getElementsByClassName("imageincart")[i].parentElement.style.display = "inline-block";
-                                break;
-                            }
-                        }
-                        document.getElementById("NumberOfProductsInCart").innerHTML = "1";
-                    })
-                });
-                return;
-            }
-            const NumberOfProductsInCart = (document.cookie.match(/NumberOfProducts=[0-9a-fA-F]+/).toString()).split("=")[1].toString();
-            let NumberOfProductsInCart1 = document.getElementById("NumberOfProductsInCart");
-            let found;
-            let num;
-            const promises = [];
-            for (let i = 1; i <= 25; i++) {
-                promises.push(
-                    sha256("numofproductsis" + i).then(hash => {
-                        if (hash.toString() === NumberOfProductsInCart.toString()) {
-                            found = true;
-                            num = i;
-                        }
-                    })
-            );
-            }
-            Promise.all(promises).then(() => {
-                if (!found) {
-                    return;
-                }
-                if (num>=9){
-
-                    NumberOfProductsInCart1.style="width: 21px;height: 21px;margin-top: 18px;right:37px;"
-                }
-                if (num>=25){
-
-                    alert("No more than 25 products!")
-                    return;
-                }
-                sha256("numofproductsis" + (num+1)).then(hash => {
-                    document.cookie = `NumberOfProducts=${hash};expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
-                });
-                /////////////////////////
-                promises.length = 0;
-                const regexPattern = new RegExp(`${encodeURIComponent("https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png")}=[0-9a-fA-F]+`);
-                const NumberOfProductsSpecificToProduct = (document.cookie.match(regexPattern)).toString().split("=")[1].toString();
-                let cookieValue2;
-                let num1;
-                for(let i=1; i <= 25; i++){
-
-                    promises.push(
-                        sha256("numofproductsis" + i).then(hash => {
-                            if (hash.toString()==NumberOfProductsSpecificToProduct.toString()){
-
-                                num1 = i;
-                            }
-                        })
-                    )
-                }
-                Promise.all(promises).then(() => {
-
-                    promises.length = 0;
-                    promises.push(
-                        sha256("numofproductsis" + (num1+1)).then(hash1 => {
-                            cookieValue2 = `${encodeURIComponent("https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png")}=${hash1}; expires=Thu, 18 Dec 9999 12:00:00 UTC; path=/`;
-                        })
-                    )
-                    Promise.all(promises).then(() => {
-
-                        document.cookie = cookieValue2;
-                        var imagefound = false;
-                        for(var t=0;t<25;t++){
-
-                            if (document.getElementsByClassName("imageincart")[t].src=="https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png"){
-
-                                document.getElementsByClassName("imageincart")[t].parentElement.getElementsByClassName("numofspecificproductincart")[0].innerHTML = num1+1;
-                                imagefound = true;
-                            }
-                        }
-                        if (imagefound==false){
-                            for(let i=0;i<25;i++){
-
-                                if (document.getElementsByClassName("imageincart")[i].src==window.location.href){
-
-                                    document.getElementsByClassName("imageincart")[i].src=="https://raw.githubusercontent.com/BlackWolfJR/1/main/1.png";
-                                    document.getElementsByClassName("imageincart")[i].parentElement.getElementsByClassName("numofspecificproductincart")[0].innerHTML = num1+1;
-                                    break;
-                                }
-                            }
-                        }
-                    })
-                    
-                })
-                /////////////////////////
-                NumberOfProductsInCart1.innerHTML = num+1;
-            });
-        }
         var cartOpen = false;
         function CartClick() {
             if (cartOpen) {
@@ -659,19 +388,17 @@
     </div>
     <hr style="box-shadow:0 0 1px black;border:1px solid rgb(1,0,26);margin:115px 20px;height: 0;width: 97%;position: absolute;">
     <div id="container">
-        <img onmouseover="changeimage1()" id="img1" src="big.png" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img>
-        <img onmouseover="changeimage2()" id="img2" src="2.jpg" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img>
-        <img onmouseover="changeimage3()" id="img3" src="3.jpg" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img>
-        <img onmouseover="changeimage4()" id="img4" src="4.jpg" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img>
-        <img onmouseover="changeimage5()" id="img5" src="5.jpg" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img>
-        <img onmouseover="changeimage6()" id="img5" src="6.jpg" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img>
-        <img onmouseover="changeimage7()" id="img5" src="7.jpg" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img>
-        <img onmouseover="changeimage8()" id="img5" src="8.jpg" style="width:65px;height:65px;box-shadow:0 0 1px black;"></img>
+        <img onmousewheel="" id="img0" style="display:none;width:65px;height:65px;box-shadow:0 0 1px black;"></img>
+        <img id="img1" style="display:none;width:65px;height:65px;box-shadow:0 0 1px black;"></img>
+        <img id="img2" style="display:none;width:65px;height:65px;box-shadow:0 0 1px black;"></img>
+        <img id="img3" style="display:none;width:65px;height:65px;box-shadow:0 0 1px black;"></img>
+        <img id="img4" style="display:none;width:65px;height:65px;box-shadow:0 0 1px black;"></img>
+        <img id="img5" style="display:none;width:65px;height:65px;box-shadow:0 0 1px black;"></img>
     </div>
     <div id="u1">
         <img id="product" style="width:452px;height:435px;" src="https://raw.githubusercontent.com/BlackWolfJR/1/main/big.png"></img>
         <div id="productinfo">
-            <span id="productname">Electric Automatic Nail Clipper with Light & 2 Speeds,Fingernail Cutter and File 2 in 1 Design, Nail Scraps Storage,USB Rechargeable Safety Fingernail Trimmer for Baby, Kids, Seniors and Adult</span>
+            <span id="productname"></span>
             <hr><span id="InStock" style="color:green;font-size: 22px;font-family: 'Poppins', 'Inter', sans-serif;">In Stock</span></hr>
             <span style="margin-left: 20px" class="fa fa-star checked"></span>
             <span class="fa fa-star checked"></span>
@@ -680,7 +407,7 @@
             <span class="fa fa-star"></span>
             <p style="display: inline;margin-left: 5px;font-size: 20px;color:rgb(1,0,26);font-family: 'Poppins', 'Inter', sans-serif;font-size: 17px;">3.1</p>
             <p style="display: inline;margin-left: 30px;font-size: 20px;color:rgb(1,0,26);font-family: 'Poppins', 'Inter', sans-serif;font-size: 17px;">124 Ratings</p>
-            <span id="price">$39.99</span>
+            <span id="price"></span>
             <img src="https://raw.githubusercontent.com/BlackWolfJR/1/main/paypalimage.png">
             <button onclick="AddToCart()" id="AddToCart">Add To Cart</button>
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
@@ -692,94 +419,12 @@
         </div>
     </div>
     <div id="u2">
-        <h1 style="margin:-5px 0;text-align:center;font-size: 22px;color:rgb(1,0,26);font-size: 20px;color:rgb(1,0,26);font-family: 'Inter', sans-serif;">About this Product</h1>
+        <h1 style="margin:-5px 0;text-align:center;font-size: 22px;color:rgb(1,0,26);font-size: 20px;color:rgb(1,0,26);font-family: 'Inter', sans-serif;">Description</h1>
         <hr style="margin:10px 0;"></hr>
         <ul>
-            <li style="font-size: 15px;font-family: 'Poppins', 'Inter', sans-serif;color:rgb(1, 0, 26);">[High Safety and Ergonomic Design] the blade is hidden behind a curved groove and the recessed cutter allows for perfect nail separation while ensuring safety , especially for babies and people with eye problems.[High Safety and Ergonomic Design] the blade is hidden behind a curved groove and the recessed cutter allows for perfect nail separation while ensuring safety , especially for babies and people with eye problems.</li>
-            <li style="font-size: 15px;font-family: 'Poppins', 'Inter', sans-serif;color:rgb(1, 0, 26);">[LED auxiliary Lighting and Quiet Working] nail cutter design adds auxiliary lighting, high speed and silent motor designed specifically for nighttime nail cutting. This nail clipper is certainly an ideal gift for the elderly, children and many people with poor eyesight.</li>
-            <li style="font-size: 15px;font-family: 'Poppins', 'Inter', sans-serif;color:rgb(1, 0, 26);">[2-Speed Models and Rechargeable Portable Design] Just one button, short press to switch the speed. High and low dual speed design is suitable for the elderly and children.with 600mAH high capacity battery, using Type-C cable (included in the package) only takes 2~3 hours to fill. It is convenient to take it on a trip or business trip.</li>
-            <li style="font-size: 15px;font-family: 'Poppins', 'Inter', sans-serif;color:rgb(1, 0, 26);">[Nail Debris Storage and Easy Cleaning]Nail clippings from nail clipping are collected in the product's storage box. By pressing the upper part of the window, you can easily open and dump the nail clippings for quick and easy cleaning.</li>
-            <li style="font-size: 15px;font-family: 'Poppins', 'Inter', sans-serif;color:rgb(1, 0, 26);">[What You Get] Package includes 1 x electric nail clipper, 1 x cleaning brush, 1 x C-type charging cable, 1 x instruction manual. Please feel free to contact us if you have any problems about the product.</li>
+            <li id="desc" style="font-size: 15px;font-family: 'Poppins', 'Inter', sans-serif;color:rgb(1, 0, 26);">[High Safety and Ergonomic Design] the blade is hidden behind a curved groove and the recessed cutter allows for perfect nail separation while ensuring safety , especially for babies and people with eye problems.[High Safety and Ergonomic Design] the blade is hidden behind a curved groove and the recessed cutter allows for perfect nail separation while ensuring safety , especially for babies and people with eye problems.</li>
         </ul>
-        <div style="width:100%;border: 1px solid blue;">
-            <div style="display:inline-block;width:300px;border: 1px solid red;">
-                <img src="moto mais rapido.jpg" style="width:300px;height:300px;box-shadow:0 0 1px black;"></img>
-                <h3 style="font-family: 'Inter', sans-serif;font-size: 16px;color:rgb(1, 0, 26);">Faster Motor</h3>
-                <p style="text-align: center;font-size: 14px;font-family: 'Poppins', 'Inter', sans-serif;color:rgb(1, 0, 26);">The motor of this electric nail clipper is an upgraded version, the use of the process is very smooth without stagnation, trimming nails more efficient (trimming nails can be completed in about 5-10 minutes, of course, depending on how short you want to trim)
-
-                    *The motor works by creating a suction force to prevent nail splashes.</p>
-            </div>
-            <div style="display:inline-block;width:300px;margin-left: 25px;border: 1px solid red;">
-                <img src="Convenient Type-C Charging.jpg" style="width:300px;height:300px;box-shadow:0 0 1px black;"></img>
-                <h3 style="font-family: 'Inter', sans-serif;font-size: 16px;color:rgb(1, 0, 26);">Convenient Type-C Charging</h3>
-                <p style="text-align: center;font-size: 14px;font-family: 'Poppins', 'Inter', sans-serif;color:rgb(1, 0, 26);">Featured with the design of the Type-C interface for charging, on the one hand can make the nail clipper have a longer battery life, on the other hand makes charging more convenient, Consequently you can carry around and use it, as long as you have any Type-C interface charging source (such as a rechargeable battery) to charge it.</p>
-            </div>
-            <div style="display:inline-block;width:300px;margin-left: 25px;border: 1px solid red;">
-                <img src="Great Nail Scraps Storage.jpg" style="width:300px;height:300px;box-shadow:0 0 1px black;"></img>
-                <h3 style="font-family: 'Inter', sans-serif;font-size: 16px;color:rgb(1, 0, 26);">Great Nail Scraps Storage</h3>
-                <p style="text-align: center;font-size: 14px;font-family: 'Poppins', 'Inter', sans-serif;color:rgb(1, 0, 26);">Ail shavings generated when cutting nails will be collected in the storage box of the product for easy cleaning, which means you never need to throw the ail shavings on time just like when you use the traditional nail clipper.</p>
-            </div>
-        </div>
-        <h1 style="text-align:center;font-size: 22px;color:rgb(1,0,26);font-size: 22px;color:rgb(1,0,26);font-size: 15px;font-family: 'Inter', sans-serif;color:rgb(1, 0, 26);">Specifications</h1>
-        <hr style="margin:-10px 0;"></hr>
-        <div style="background-color: azure;position: absolute;width:50%;margin-top:20px;box-shadow: 0px 0 2px black;">
-            <div style="display:flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
-                <p style="font-size: 19px;">Brand</p>
-            </div>
-            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
-                <p style="font-size: 19px;">Model</p>
-            </div>
-            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
-                <p style="font-size: 19px;">Magnetic cover</p>
-            </div>
-            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
-                <p style="font-size: 19px;">Light sensor</p>
-            </div>
-            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
-                <p style="font-size: 19px;">Fingerprint</p>
-            </div>
-            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
-                <p style="font-size: 19px;">LED soft light</p>
-            </div>
-            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
-                <p style="font-size: 19px;">Hanging hole</p>
-            </div>
-            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
-                <p style="font-size: 19px;">Size</p>
-            </div>
-            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
-                <p style="font-size: 19px;">Weight</p>
-            </div>
-        </div>
-        <div style="background-color: wheat;position: absolute;width:50%;margin-top:20px;box-shadow: 0px 1px 2px black;margin-left:50%">
-            <div style="display:flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
-                <p style="font-size: 19px;">Vanyuei</p>
-            </div>
-            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
-                <p style="font-size: 19px;">SMPH-ZJDO3S</p>
-            </div>
-            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
-                <p style="font-size: 19px;">Yes</p>
-            </div>
-            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
-                <p style="font-size: 19px;">Yes</p>
-            </div>
-            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
-                <p style="font-size: 19px;">No</p>
-            </div>
-            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
-                <p style="font-size: 19px;">Yes</p>
-            </div>
-            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
-                <p style="font-size: 19px;">Yes</p>
-            </div>
-            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
-                <p style="font-size: 19px;">2.08*1.67*0.8 Inch</p>
-            </div>
-            <div style="display: flex;width:100%;justify-content:center;box-shadow: 0px 1px 2px black;">
-                <p style="font-size: 19px;">0.11 lb</p>
-            </div>
-        </div>
+        <hr style="margin:10px 0;"></hr>
     </div>
 </body>
 </html>
