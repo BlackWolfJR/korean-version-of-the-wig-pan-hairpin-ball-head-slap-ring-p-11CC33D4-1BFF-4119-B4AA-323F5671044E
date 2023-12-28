@@ -303,15 +303,25 @@
         }
     </style>
     <script>
+        function IdentifyPricePattern(productprice){
+            if (!productprice.includes("-")){
+                if (productprice.split(".")[1].length==1 && productprice.length==3){
+                    return "$"+productprice+"0";
+                }
+            }
+            else{
+                return "$"+productprice;
+            }
+        }
         window.addEventListener("load", function(){
             const productid = window.location.href.split("-p-")[1].replace("/", "")
             fetch("https://backend-6eeb.onrender.com/", {headers: {"Content-Type": "application/json"}, method:"POST", body: JSON.stringify({"Action": "Get Product Details", "PID":productid})}).then(response=>response.json()).then(
                 data=>{
                     if (data.data==undefined){return}
                     document.getElementById("desc").innerHTML = data.data.description;
-                    document.getElementById("price").innerHTML = "$"+data.data.sellPrice+"0";
+                    document.getElementById("price").textContent = IdentifyPricePattern(data.data.sellPrice)
                     console.log(data.data.productNameEn);
-                    document.getElementById("productname").innerHTML = data.data.productNameEn;
+                    document.getElementById("productname").textContent = data.data.productNameEn;
                     document.getElementById("product").src = data.data.productImageSet[0];
                     for (let i = 0;i<data.data.productImageSet.length;i++){
                         document.getElementById("img"+i).style.display = "block";
